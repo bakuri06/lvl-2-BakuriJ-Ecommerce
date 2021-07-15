@@ -1,0 +1,17 @@
+.fixx{
+    width:100%;
+    position:relative;
+}
+
+.forStyle{
+    display: flex;
+    justify-content: space-between;
+}
+
+.stylee{
+    display: flex;
+}
+
+.fa-th-list,.fa-th-large{
+    color:black;
+}

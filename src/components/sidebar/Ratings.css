@@ -1,0 +1,21 @@
+.rating{
+    display: flex;
+    align-items: center;
+    margin:0;
+}
+
+ul{
+    padding-inline-start: 0px;
+}
+
+ul li{
+    list-style: none;
+}
+
+.fa-star{
+    color:#1266f1;
+}
+
+.margin_null{
+    margin:0;
+}

@@ -1,0 +1,36 @@
+.black{
+    background-color: black;
+    color:white;
+}
+
+a{
+    text-decoration: none;
+}
+
+.blacked{
+    color:white;
+}
+
+.fb-ic,.ins-ic,.tw-ic,.li-ic,.gplus-ic{
+    color:white;
+}
+
+.fb-ic{
+    margin:20px 0;
+
+}
+
+.toFlex{
+    display: flex;
+}
+
+.blue{
+    background-color: #1266F1;
+    display: flex;
+}
+
+h6{
+    font-size:1rem;
+    font-weight: 500;
+    margin:20px;
+}

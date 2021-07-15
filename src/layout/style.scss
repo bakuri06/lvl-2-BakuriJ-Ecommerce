@@ -1,0 +1,116 @@
+.for_flex{
+    display: flex;
+    align-items: center;
+    padding:0px;
+}
+
+
+.for_flex{
+    .img{
+        height:80px;
+    }
+}
+
+ul{
+    list-style: none;
+    margin:0;
+    padding-inline-start: 30px;
+}
+
+.for_padding{
+    padding-left:15px;
+    text-transform: uppercase;
+    font-weight:600;
+}
+
+.forBorder{
+    border-bottom:2px solid #B58371;
+    font-size: 1.5rem;
+}
+
+.date{
+    color:#bb6a58;
+}
+
+.for_margin{
+    margin-top:50px;
+}
+
+.for_flex img{
+    height:60px;
+}
+
+li{
+    padding-right:30px;
+}
+
+.covered{
+    position:fixed;
+    display: block;
+    background-color: rgba(255, 255, 255, 0.945);
+    padding:30px;
+    z-index:10;
+    top:0;
+    left:-150%;
+    width:300px;
+    height:200px;
+    transition: left 0.3s ease 0s;
+}
+
+.covered._active{
+  /*  left:calc(40%);
+    top:50px;*/
+    left: auto;
+    align-items: center;
+    justify-self: center;
+}
+
+input[type=text], select {
+    width: 600px;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-right:40px;
+}
+
+.inputVal{
+    margin-right:60px;
+}
+
+.border{
+    border-left:2px solid #B58371;
+}
+
+button{
+    .MuiButtonBase-root{
+        .MuiButton-root{
+            .MuiButton-contained{
+                .toMargin{
+                    .MuiButton-containedSecondary{
+                        margin-top:20px;
+                        color: #000;
+                        background-color: #EE513E;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+    }
+}
+.toMargin{
+    color: #000;
+    background-color: #EE513E;
+    font-weight: bold;
+}
+.forPosition{
+    position: absolute;
+    margin-top: 20px;
+}
+
+.inputclass{
+    width:950px;
+    margin:0 auto;
+}

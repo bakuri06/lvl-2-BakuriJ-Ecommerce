@@ -1,0 +1,9 @@
+.quantity{
+    width:100px;
+    justify-content: space-between;
+    border:2px solid whitesmoke;
+}
+
+.fa-minus-circle,.fa-plus-circle{
+    cursor: pointer;
+}
