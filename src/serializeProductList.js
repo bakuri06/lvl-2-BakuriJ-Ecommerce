@@ -1,5 +1,5 @@
 export default function serializeProductList(data){
-    return JSON.map(el => {
+    return data.map(el => {
         return {
             title:el.title,
             price:el.price,

@@ -1,6 +1,6 @@
 import React from 'react'
 import Home from "./pages/Home";
-import ScrollToTop from './ScrollToTop';
+import ScrollToTop from './components/ScrollToTop';
 import ProductList from './pages/ProductList'
 import SingleProduct from './pages/SingleProduct'
 import AdminPanel from './pages/AdminPanel';
