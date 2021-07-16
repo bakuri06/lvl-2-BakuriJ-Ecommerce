@@ -1,11 +1,6 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import './Signup.css'
-import { CssBaseline } from '@material-ui/core/CssBaseline';
- 
- // A custom validation function. This must return an object
- // which keys are symmetrical to our values/initialValues
-
  
  const SignupForm = () => {
    const formik = useFormik({
@@ -16,7 +11,7 @@ import { CssBaseline } from '@material-ui/core/CssBaseline';
         category: '',
         img: '',
      },
-     onSubmit: (values, setStatus, resetForm, isSubmitting, setSubmitting, setErrors) => {
+     onSubmit: (values, setStatus, resetForm) => {
         fetch('https://fakestoreapi.com/products',{
             method:"POST",
             body:JSON.stringify(

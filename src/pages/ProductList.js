@@ -10,6 +10,7 @@ import Image from '../layout/header/Image'
 import productData from '../api/data'
 import Loader from '../components/Loader';
 import { useEffect } from 'react';
+import Api from '../api/Api'
 
 const ProductList = () => {
     const [data, setData] = useState(productData);
@@ -17,19 +18,8 @@ const ProductList = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch('https://fakestoreapi.com/products')
-            .then(res=>res.json())
-            .then(json=> {
-                setData(json.map(el => {
-                    return {
-                        title:el.title,
-                        price:el.price,
-                        img:el.image,
-                        id:el.id,
-                        description:el.description
-                    }
-                }))
-            })
+        Api.getProductList()
+        .then(resp => setData(resp))
             .catch(err => console.log(err))
             .finally(() => {
                 setLoading(false);

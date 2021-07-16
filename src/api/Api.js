@@ -1,5 +1,3 @@
-import serializeProductList from "./serializeProductList";
-
 const Api = {
 
     getProductList: function () {

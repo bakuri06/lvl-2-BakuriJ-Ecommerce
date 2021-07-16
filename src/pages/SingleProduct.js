@@ -2,9 +2,7 @@ import React from 'react'
 import MainContent from '../layout/layouts/MainContent';
 import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
-import './LinkItem.css'
 import { useState } from 'react';
-import { makeStyles } from '@material-ui/core';
 import { CardActionArea } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
@@ -17,33 +15,8 @@ import { useEffect } from 'react';
 import Loader from '../components/Loader';
 import CustomizedButtons from '../components/details/CustomizedButtons';
 import NavTabs from '../components/NavTabs'
-
-const useStyles = makeStyles({
-    root: {
-        width: '100%',
-        marginRight: '20px',
-        marginBottom: '20px'
-    },
-    media: {
-        height: 300,
-    },
-    forFlex: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'
-    },
-    maxWidth: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 300,
-    },
-    media2: {
-        height: 140
-    }
-});
-
-
+import Api from '../api/Api';
+import useStyles from '../styles/SingleProductStyles'
 const SingleProduct = () => {
     const classes = useStyles();
     const [data, setData] = useState({});
@@ -51,17 +24,8 @@ const SingleProduct = () => {
     const { id } = useParams();
     useEffect(() => {
         setLoading(true);
-        fetch(`https://fakestoreapi.com/products/${id}`)
-            .then(res => res.json())
-            .then(el => {
-                setData({
-                    title: el.title,
-                    price: el.price,
-                    img: el.image,
-                    id: el.id,
-                    description: el.description
-                })
-            })
+        Api.getSingleItem(id)
+        .then(resp => setData(resp))
             .catch(err => console.log(err))
             .finally(() => {
                 setLoading(false);
@@ -74,7 +38,7 @@ const SingleProduct = () => {
         <MainContent>
             <Grid container>
                 <Grid item xs={12} lg={12} md={12}>
-                    <Box component='div' className='bannerColor' display='flex' justifyContent='center' mb={5}>
+                    <Box component='div' className={classes.bannerColor} display='flex' justifyContent='center' mb={5}>
                         <h3>Product Page</h3>
                     </Box>
                 </Grid>
@@ -133,9 +97,9 @@ const SingleProduct = () => {
                         </Grid>
                         <Grid item xs={6} lg={6} md={6} component={Box} pl={3} mb={5}>
 
-                            <h5 className='noMargin hStyles'>{data.title}</h5>
-                            <p className="text-muted">Shirts</p>
-                            <ul className="rating">
+                            <h5 className={classes.noMargin}>{data.title}</h5>
+                            <p className={classes.textMuted}>Shirts</p>
+                            <ul className={classes.ratings}>
                                 <li>
                                     <i className="fas fa-star fa-sm"></i>
                                 </li>
@@ -152,7 +116,7 @@ const SingleProduct = () => {
                                     <i className="far fa-star fa-sm"></i>
                                 </li>
                             </ul>
-                            <p className="pMargins"><span ><strong>${data.price}</strong></span></p>
+                            <p className={classes.pMargins}><span ><strong>${data.price}</strong></span></p>
                             <p>{data.description}
                             </p>
                             <BasicTable data={data} />
