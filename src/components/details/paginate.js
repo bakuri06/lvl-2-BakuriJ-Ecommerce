@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Pagination } from '@material-ui/lab';
+import Pagination from '@material-ui/lab/Pagination';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -10,11 +10,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function PaginationBasic() {
+export default function Paginate({total,limit,onClick}) {
   const classes = useStyles();
+
+  let goTo = () => {
+    onClick(20);
+}
+
   return (
     <div className={classes.root}>
-      <Pagination count={3} />
+      <Pagination onClick={goTo} count={Math.floor(total/limit)} />
+
     </div>
   );
 }

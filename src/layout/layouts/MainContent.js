@@ -3,6 +3,7 @@ import { Container } from '@material-ui/core';
 import Header from '../header/Header';
 import { makeStyles } from '@material-ui/core';
 import Footer from '../footer/Footer'
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => {
     return ({
@@ -18,11 +19,12 @@ const useStyles = makeStyles((theme) => {
 
 const MainContent = ({ children }) => {
     const classes = useStyles();
+    const [isAdmin,setAdmin] = useState(false);
 
     return (
         <>
             <Container maxWidth='xl' classes={{ root: classes.noPadding }}>
-                <Header />
+                <Header isAdmin={isAdmin} />
             </Container>
             <Container maxWidth='xl' classes={{ root: classes.noPadding }}>
                 {children}

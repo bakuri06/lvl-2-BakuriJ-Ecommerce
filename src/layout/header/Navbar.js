@@ -13,6 +13,7 @@ import { HOMEPAGE } from '../../routes';
 import { PRODUCT_LIST } from '../../routes';
 import { SINGLE_LIST } from '../../routes';
 import { ADMIN } from '../../routes';
+import { PAGINATION } from './../../routes';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Navbar() {
+export default function Navbar({isAdmin}) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
 
@@ -51,6 +52,8 @@ export default function Navbar() {
       setNavbar(false);
     }
   }
+
+  console.log(isAdmin);
 
   window.addEventListener('scroll', changeBackground);
 
@@ -63,13 +66,15 @@ export default function Navbar() {
           </Typography>
           <i className="fas fa-bars"></i>
 
-          <ul className='flexed'>
+          {isAdmin? '' : (
+            <ul className='flexed'>
             <li>
               <MLink component={Link} to={HOMEPAGE}>Home</MLink>
               <MLink component={Link} to={PRODUCT_LIST}>List</MLink>
               <MLink component={Link} to={SINGLE_LIST}>Single</MLink>
               <MLink component={Link} to={ADMIN}>Admin</MLink>
             </li>
+            
             <li>
               <a href="#!">
                 <span className='badge badge-pill'>1</span>
@@ -100,6 +105,8 @@ export default function Navbar() {
               </Button>
             </li>
           </ul>
+          )} 
+
         </Toolbar>
       </AppBar>
     </div>

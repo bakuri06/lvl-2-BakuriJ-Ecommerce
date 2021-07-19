@@ -1,18 +1,25 @@
+import {serializeProductList} from './../serializeProductList';
+import { serializeSingleProduct } from './../serializeProductList';
+
 const Api = {
+    baseUrl:'https://fakestoreapi.com/',
+
+    getData:(url,params,method='get') => {
+        return fetch(Api.baseUrl + url,
+            {
+                method:method.toUpperCase,
+                headers: {
+                    'Content-Type':'application/json'
+                },
+                body:JSON.stringify(params)
+            })
+    },
 
     getProductList: function () {
         return fetch('https://fakestoreapi.com/products')
             .then(res => res.json())
             .then(json => {
-                return json.map(el => {
-                    return {
-                        title: el.title,
-                        price: el.price,
-                        img: el.image,
-                        id: el.id,
-                        description: el.description
-                    }
-                })
+                return serializeProductList(json);
             })
     },
 
@@ -20,17 +27,18 @@ const Api = {
         return fetch(`https://fakestoreapi.com/products/${id}`)
         .then(res => res.json())
         .then(el => {
-            console.log(el);
-            return ({
-                title: el.title,
-                price: el.price,
-                img: el.image,
-                id: el.id,
-                description: el.description
-            }
-            )
+            return serializeSingleProduct(el);
         })
-    }
+    },
+
+    getFilteredList: (limit) => {
+        console.log(limit);
+        return fetch(`https://fakestoreapi.com/products?limit=${limit}`)
+            .then(res => res.json())
+            .then(json => {
+                return serializeProductList(json);
+            })
+    },
 }
 
 export default Api;

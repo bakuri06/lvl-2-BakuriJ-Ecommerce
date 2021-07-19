@@ -141,10 +141,10 @@ function AdminSidebar(props) {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <AdminTable />
         <Modal>
           <SignupForm />
         </Modal>
+        <AdminTable />
       </main>
     </div>
   );

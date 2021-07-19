@@ -11,10 +11,31 @@ import productData from '../api/data'
 import Loader from '../components/Loader';
 import { useEffect } from 'react';
 import Api from '../api/Api'
+import dataa from '../api/data';
 
 const ProductList = () => {
     const [data, setData] = useState(productData);
     const [loading,setLoading] = useState(false);
+    const [page,setPage] = useState({
+        page:1,
+        total:100,
+        limit:20,
+    })
+
+    const changePage= (p) => {
+        Api.getFilteredList(page.limit)
+        .then(() => {
+            setPage({
+                ...page,
+                page:p
+            });
+            setData(dataa)}
+            )
+            .catch(err => console.log(err))
+            .finally(() => {
+                setLoading(false);
+            })
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -36,7 +57,7 @@ const ProductList = () => {
                     </Grid>
                     <Grid item xs={8} md={8} sm={12} mt={5} component='Box'>
                         <Grid container>
-                            <Label />
+                            <Label total={page.total} limit={page.limit} onClick={(page) => {changePage(page)}}/>
                             <Loader isLoading={loading}>
                             {data.map(el => (
                                 <Grid item xs={4} lg={4} md={6} sm={6} mb={5}>

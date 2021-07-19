@@ -4,6 +4,7 @@ import ScrollToTop from './components/ScrollToTop';
 import ProductList from './pages/ProductList'
 import SingleProduct from './pages/SingleProduct'
 import AdminPanel from './pages/AdminPanel';
+
 import {
     BrowserRouter as Router,
     Switch,

@@ -16,11 +16,12 @@ const useStyles = makeStyles((theme) => {
     });
 });
 
-const Header = () => {
+const Header = ({isAdmin}) => {
     const classes=useStyles();
+    console.log(isAdmin);
     return(
         <Container classes={{root:classes.noPadding}}maxWidth='xl' mb={4}>
-            <Navbar />
+            <Navbar isAdmin={isAdmin}/>
         </Container>
     )
 }

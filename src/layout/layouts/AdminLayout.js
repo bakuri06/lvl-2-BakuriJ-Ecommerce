@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import Header from '../header/Header'
+import { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
@@ -15,11 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminLayout = ({ children }) => {
     const classes = useStyles();
+    const [isAdmin,setAdmin] = useState(true);
 
     return (
         <>
             <Container maxWidth='xl' classes={{root:classes.noPadding}}>
-                <Header />
+                <Header isAdmin={isAdmin}/>
             </Container>
             <Container maxWidth='xl' classes={{root:classes.noPadding}}>
                 {children}

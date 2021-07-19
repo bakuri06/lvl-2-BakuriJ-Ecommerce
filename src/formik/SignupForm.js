@@ -2,6 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import "./Signup.css";
 import { Button } from "@material-ui/core";
+
 const SignupForm = () => {
   const formik = useFormik({
     initialValues: {
@@ -11,7 +12,8 @@ const SignupForm = () => {
       category: "",
       img: "",
     },
-    onSubmit: (values, setStatus, resetForm) => {
+
+    onSubmit: (values,{setStatus, resetForm}) => {
       fetch("https://fakestoreapi.com/products", {
         method: "POST",
         body: JSON.stringify({
@@ -90,7 +92,11 @@ const SignupForm = () => {
       />
       {formik.errors.img ? <div>{formik.errors.img}</div> : null}
 
-      <Button type='submit' variant="contained" style={{backgroundColor:'green',color:'white'}}>
+      <Button
+        type="submit"
+        variant="contained"
+        style={{ backgroundColor: "green", color: "white" }}
+      >
         Submit
       </Button>
     </form>
