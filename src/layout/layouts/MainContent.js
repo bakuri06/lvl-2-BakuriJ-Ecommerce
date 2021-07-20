@@ -24,7 +24,7 @@ const MainContent = ({ children }) => {
     return (
         <>
             <Container maxWidth='xl' classes={{ root: classes.noPadding }}>
-                <Header isAdmin={isAdmin} />
+                <Header isAdmin={false} />
             </Container>
             <Container maxWidth='xl' classes={{ root: classes.noPadding }}>
                 {children}

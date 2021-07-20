@@ -23,13 +23,14 @@ const ProductList = () => {
     })
 
     const changePage= (p) => {
+        setLoading(true);
         Api.getFilteredList(page.limit)
-        .then(() => {
+        .then((resp) => {
             setPage({
                 ...page,
                 page:p
             });
-            setData(dataa)}
+            setData(resp)}
             )
             .catch(err => console.log(err))
             .finally(() => {

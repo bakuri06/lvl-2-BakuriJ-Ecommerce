@@ -17,6 +17,8 @@ import CustomizedButtons from '../components/details/CustomizedButtons';
 import NavTabs from '../components/NavTabs'
 import Api from '../api/Api';
 import useStyles from '../styles/SingleProductStyles'
+import '../formik/SignInForm.css'
+
 const SingleProduct = () => {
     const classes = useStyles();
     const [data, setData] = useState({});
@@ -39,7 +41,7 @@ const SingleProduct = () => {
             <Grid container>
                 <Grid item xs={12} lg={12} md={12}>
                     <Box component='div' className={classes.bannerColor} display='flex' justifyContent='center' mb={5}>
-                        <h3>Product Page</h3>
+                        <h3 className='main_banner'>Product Page</h3>
                     </Box>
                 </Grid>
             </Grid>

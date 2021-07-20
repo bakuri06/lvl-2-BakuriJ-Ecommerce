@@ -1,0 +1,56 @@
+.forgetPass{
+    color: #007bff;
+    text-decoration: none;
+}
+
+.main_banner{
+    font-weight: 500;
+    font-size: 1.75rem;
+    line-height: 1.2;
+    font-family: Roboto,sans-serif;
+}
+.fixed{
+    color:#4f4f4f;
+}
+
+.fa-facebook-f.second{
+    background-color:#3b5998;
+    color: #fff;
+    text-align: center;
+    font-size: .96154rem;
+    line-height: 36.15px;
+    border-radius: 50%;
+    width: 36.15px;
+    height: 36.15px;
+}
+
+.fa-twitter.second{
+    background-color: #007bff;
+    color: #fff;
+    font-size: .96154rem;
+    line-height: 36.15px;
+    border-radius: 50%;
+    width: 36.15px;
+    height: 36.15px;
+}
+
+
+.fa-linkedin-in.second{
+    background-color: #0082ca;
+    color:#fff;
+    font-size: .96154rem;
+    line-height: 36.15px;
+    border-radius: 50%;
+    width: 36.15px;
+    height: 36.15px;
+}
+
+.fa-github{
+    background-color:#333;
+    color:#fff;
+    font-size: .96154rem;
+    line-height: 36.15px;
+    border-radius: 50%;
+    width: 36.15px;
+    height: 36.15px;
+}

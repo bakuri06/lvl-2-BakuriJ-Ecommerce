@@ -8,9 +8,10 @@ import { useState } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
 import "./SignInForm.css";
-import SignUpButton from "./SignUpButton";
+import SignInButton from "./SignInButton";
 
-const SignUpForm = () => {
+
+const SignInForm = () => {
   const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
@@ -18,11 +19,8 @@ const SignUpForm = () => {
   };
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
       email: "",
       password: "",
-      phoneNumber: "",
     },
 
     onSubmit: (values, { setStatus, resetForm }) => {
@@ -49,32 +47,6 @@ const SignUpForm = () => {
   });
   return (
     <form className="styling" onSubmit={formik.handleSubmit}>
-      <Box component='div' display='flex' justifyContent='space-between'>
-        <TextField
-          id="firstName"
-          value={formik.values.firstName}
-          name="firstName"
-          type="text"
-          onChange={formik.handleChange}
-          label="First Name"
-          variant="outlined"
-          style={{width:'49%'}}
-        />
-        {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
-
-        <TextField
-          id="lastName"
-          value={formik.values.lastName}
-          name="lastName"
-          type="text"
-          onChange={formik.handleChange}
-          label="Last Name"
-          variant="outlined"
-          style={{width:'49%'}}
-        />
-        {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
-      </Box>
-
       <TextField
         id="email"
         value={formik.values.email}
@@ -83,7 +55,7 @@ const SignUpForm = () => {
         onChange={formik.handleChange}
         label="Your email"
         variant="outlined"
-        style={{marginTop:'20px'}}
+        style={{marginBottom:'20px'}}
       />
       {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
@@ -95,25 +67,12 @@ const SignUpForm = () => {
         onChange={formik.handleChange}
         label="Your password"
         variant="outlined"
-        style={{marginTop:'20px'}}
       />
       {formik.errors.password ? <div>{formik.errors.password}</div> : null}
 
-      <TextField
-        id="phoneNumber"
-        value={formik.values.phoneNumber}
-        name="phoneNumber"
-        type="number"
-        onChange={formik.handleChange}
-        label="Phone Number"
-        variant="outlined"
-        style={{marginTop:'20px'}}
-      />
-      {formik.errors.phoneNumber ? <div>{formik.errors.phoneNumber}</div> : null}
-
       <Box component="div" display="flex" justifyContent="space-between">
         <FormControlLabel
-          style={{ color: "#6c757d" }}
+            style={{color:'#6c757d'}}
           control={
             <Checkbox
               checked={checked}
@@ -122,9 +81,14 @@ const SignUpForm = () => {
               color="primary"
             />
           }
-          label="Subscribe to our newsletter"
+          label="Remember me"
         />
 
+        <p>
+          <a className="forgetPass" href="">
+            Forgot password?
+          </a>
+        </p>
       </Box>
 
       <Box
@@ -133,28 +97,23 @@ const SignUpForm = () => {
         alignItems="center"
         flexDirection="column"
       >
-        <SignUpButton />
+        <SignInButton />
 
+        <p className='fixed'>
+          Not a member? <a href="" className="forgetPass">Register</a>
+        </p>
 
-        <p className="fixed">or sign in with:</p>
+        <p className='fixed'>or sign in with:</p>
 
         <div>
-          <Button>
-            <i className="fab fa-facebook-f second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-twitter second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-linkedin-in second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-github"></i>
-          </Button>
+            <Button><i className="fab fa-facebook-f second"></i></Button>
+            <Button><i className="fab fa-twitter second"></i></Button>
+            <Button><i className="fab fa-linkedin-in second"></i></Button>
+            <Button><i className="fab fa-github"></i></Button>
         </div>
       </Box>
     </form>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

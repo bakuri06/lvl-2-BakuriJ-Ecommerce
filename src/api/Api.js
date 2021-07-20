@@ -32,7 +32,7 @@ const Api = {
     },
 
     getFilteredList: (limit) => {
-        console.log(limit);
+
         return fetch(`https://fakestoreapi.com/products?limit=${limit}`)
             .then(res => res.json())
             .then(json => {

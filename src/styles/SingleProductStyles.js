@@ -27,6 +27,7 @@ const useStyles = makeStyles({
         backgroundColor: '#F6F6F6',
         padding:'30px',
         marginTop:'80px',
+        boxShadow: '0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)',
     },
     noMargin:{
         margin:0,

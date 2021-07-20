@@ -18,7 +18,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import CategoryIcon from "@material-ui/icons/Category";
 import Modal from "./Modal";
 import AdminTable from "./AdminTable";
-import SignupForm from "../formik/SignupForm";
+import SignupForm from "../formik/AddProduct";
 
 const drawerWidth = 240;
 

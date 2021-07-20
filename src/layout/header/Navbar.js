@@ -53,7 +53,6 @@ export default function Navbar({isAdmin}) {
     }
   }
 
-  console.log(isAdmin);
 
   window.addEventListener('scroll', changeBackground);
 
@@ -95,12 +94,12 @@ export default function Navbar({isAdmin}) {
               </a>
             </li>
             <li>
-              <a href="#!">
+              <a href="/login">
                 Sign in
               </a>
             </li>
             <li >
-              <Button variant='outlined' className={classes.button}>
+              <Button href='/register' variant='outlined' className={classes.button}>
                 Sign Up
               </Button>
             </li>

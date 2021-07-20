@@ -21,7 +21,7 @@ const AdminLayout = ({ children }) => {
     return (
         <>
             <Container maxWidth='xl' classes={{root:classes.noPadding}}>
-                <Header isAdmin={isAdmin}/>
+                <Header isAdmin={true}/>
             </Container>
             <Container maxWidth='xl' classes={{root:classes.noPadding}}>
                 {children}
