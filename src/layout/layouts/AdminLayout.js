@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 const AdminLayout = ({ children }) => {
     const classes = useStyles();
-    const [isAdmin,setAdmin] = useState(true);
 
     return (
         <>

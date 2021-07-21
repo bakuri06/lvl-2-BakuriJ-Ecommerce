@@ -10,6 +10,16 @@ import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignUpButton from "./SignUpButton";
 
+function validatePassword(value) {
+  let error;
+  if (!value) {
+    error = "Required";
+  } else if (value.length < 8) {
+    error = "Invalid email address";
+  }
+  return error;
+}
+
 const SignUpForm = () => {
   const [checked, setChecked] = useState(false);
 
@@ -25,31 +35,14 @@ const SignUpForm = () => {
       phoneNumber: "",
     },
 
-    onSubmit: (values, { setStatus, resetForm }) => {
-      fetch("https://fakestoreapi.com/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-      })
-        .then((res) => res.json())
-        .then((json) => {
-          console.log(json);
-          setStatus(true);
-          resetForm();
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-        .finally(() => {
-          alert("sent");
-        });
+    onSubmit: (values) => {
+      console.log('sent');
     },
   });
+
   return (
-    <form className="styling" onSubmit={formik.handleSubmit}>
-      <Box component='div' display='flex' justifyContent='space-between'>
+    <form className="styling" Validate={validatePassword} onSubmit={formik.handleSubmit}>
+      <Box component="div" display="flex" justifyContent="space-between">
         <TextField
           id="firstName"
           value={formik.values.firstName}
@@ -58,7 +51,7 @@ const SignUpForm = () => {
           onChange={formik.handleChange}
           label="First Name"
           variant="outlined"
-          style={{width:'49%'}}
+          style={{ width: "49%" }}
         />
         {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
 
@@ -70,7 +63,7 @@ const SignUpForm = () => {
           onChange={formik.handleChange}
           label="Last Name"
           variant="outlined"
-          style={{width:'49%'}}
+          style={{ width: "49%" }}
         />
         {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
       </Box>
@@ -83,7 +76,7 @@ const SignUpForm = () => {
         onChange={formik.handleChange}
         label="Your email"
         variant="outlined"
-        style={{marginTop:'20px'}}
+        style={{ marginTop: "20px" }}
       />
       {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
@@ -95,7 +88,8 @@ const SignUpForm = () => {
         onChange={formik.handleChange}
         label="Your password"
         variant="outlined"
-        style={{marginTop:'20px'}}
+        style={{ marginTop: "20px" }}
+        helperText="At least 8 characters and 1 digit"
       />
       {formik.errors.password ? <div>{formik.errors.password}</div> : null}
 
@@ -107,13 +101,16 @@ const SignUpForm = () => {
         onChange={formik.handleChange}
         label="Phone Number"
         variant="outlined"
-        style={{marginTop:'20px'}}
+        style={{ marginTop: "20px" }}
+        helperText="Optional - for two step authentication"
       />
-      {formik.errors.phoneNumber ? <div>{formik.errors.phoneNumber}</div> : null}
+      {formik.errors.phoneNumber ? (
+        <div>{formik.errors.phoneNumber}</div>
+      ) : null}
 
-      <Box component="div" display="flex" justifyContent="space-between">
+      <Box component="div" display="flex" alignSelf='center' >
         <FormControlLabel
-          style={{ color: "#6c757d" }}
+          style={{ color: "#6c757d"}}
           control={
             <Checkbox
               checked={checked}
@@ -124,7 +121,6 @@ const SignUpForm = () => {
           }
           label="Subscribe to our newsletter"
         />
-
       </Box>
 
       <Box
@@ -134,7 +130,6 @@ const SignUpForm = () => {
         flexDirection="column"
       >
         <SignUpButton />
-
 
         <p className="fixed">or sign in with:</p>
 

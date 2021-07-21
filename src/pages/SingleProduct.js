@@ -17,7 +17,7 @@ import CustomizedButtons from '../components/details/CustomizedButtons';
 import NavTabs from '../components/NavTabs'
 import Api from '../api/Api';
 import useStyles from '../styles/SingleProductStyles'
-import '../formik/SignInForm.css'
+import '../sign/SignInForm.css'
 
 const SingleProduct = () => {
     const classes = useStyles();

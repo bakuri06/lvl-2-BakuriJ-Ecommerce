@@ -2,10 +2,9 @@ import React from 'react'
 import MainContent from '../layout/layouts/MainContent';
 import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
-import { Container } from '@material-ui/core';
 import useStyles from '../styles/SingleProductStyles'
-import SignUpForm from '../formik/SignUpForm';
-import '../formik/SignInForm.css'
+import SignUpForm from '../sign/SignUpForm';
+import '../sign/SignInForm.css'
 
 const SignUp = () => {
     const classes=useStyles();

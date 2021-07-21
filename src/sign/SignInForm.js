@@ -10,7 +10,6 @@ import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignInButton from "./SignInButton";
 
-
 const SignInForm = () => {
   const [checked, setChecked] = useState(false);
 
@@ -27,7 +26,7 @@ const SignInForm = () => {
       fetch("https://fakestoreapi.com/auth/login", {
         method: "POST",
         body: JSON.stringify({
-          email: values.email,
+          username: values.email,
           password: values.password,
         }),
       })
@@ -41,7 +40,8 @@ const SignInForm = () => {
           console.log(error);
         })
         .finally(() => {
-          alert("sent");
+          console.log("sent");
+          window.localStorage.setItem(values.email, values.password);
         });
     },
   });
@@ -55,7 +55,7 @@ const SignInForm = () => {
         onChange={formik.handleChange}
         label="Your email"
         variant="outlined"
-        style={{marginBottom:'20px'}}
+        style={{ marginBottom: "20px" }}
       />
       {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
@@ -72,7 +72,7 @@ const SignInForm = () => {
 
       <Box component="div" display="flex" justifyContent="space-between">
         <FormControlLabel
-            style={{color:'#6c757d'}}
+          style={{ color: "#6c757d" }}
           control={
             <Checkbox
               checked={checked}
@@ -99,17 +99,28 @@ const SignInForm = () => {
       >
         <SignInButton />
 
-        <p className='fixed'>
-          Not a member? <a href="" className="forgetPass">Register</a>
+        <p className="fixed">
+          Not a member?{" "}
+          <a href="" className="forgetPass">
+            Register
+          </a>
         </p>
 
-        <p className='fixed'>or sign in with:</p>
+        <p className="fixed">or sign in with:</p>
 
         <div>
-            <Button><i className="fab fa-facebook-f second"></i></Button>
-            <Button><i className="fab fa-twitter second"></i></Button>
-            <Button><i className="fab fa-linkedin-in second"></i></Button>
-            <Button><i className="fab fa-github"></i></Button>
+          <Button>
+            <i className="fab fa-facebook-f second"></i>
+          </Button>
+          <Button>
+            <i className="fab fa-twitter second"></i>
+          </Button>
+          <Button>
+            <i className="fab fa-linkedin-in second"></i>
+          </Button>
+          <Button>
+            <i className="fab fa-github"></i>
+          </Button>
         </div>
       </Box>
     </form>
