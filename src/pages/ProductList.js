@@ -22,9 +22,9 @@ const ProductList = () => {
         limit:20,
     })
 
-    const changePage= (p) => {
+    const changePage = (e,p) => {
         setLoading(true);
-        Api.getFilteredList(page.limit)
+        Api.getPages(p)
         .then((resp) => {
             setPage({
                 ...page,
@@ -58,7 +58,7 @@ const ProductList = () => {
                     </Grid>
                     <Grid item xs={8} md={8} sm={12} mt={5} component='Box'>
                         <Grid container>
-                            <Label total={page.total} limit={page.limit} onClick={(page) => {changePage(page)}}/>
+                            <Label total={page.total} limit={page.limit} onChange={changePage}/>
                             <Loader isLoading={loading}>
                             {data.map(el => (
                                 <Grid item xs={4} lg={4} md={6} sm={6} mb={5}>
@@ -66,7 +66,6 @@ const ProductList = () => {
                                 </Grid>
                             ))}
                             </Loader>
-                            <Label />
                         </Grid>
                     </Grid>
                 </Grid>

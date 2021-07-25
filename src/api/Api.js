@@ -31,9 +31,51 @@ const Api = {
         })
     },
 
+    signInApi : (email,password) => {
+    
+        return fetch("http://159.65.126.180/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+              email: email,
+              password: password,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          })
+    },
+    signUpApi : (name,email,password,password_confirmation) => {
+
+        console.log(name,email,password,password_confirmation);
+        return fetch("http://159.65.126.180/api/register", {
+            method: "POST",
+            body: JSON.stringify({
+              name: name,
+              email: email,
+              password: password,
+              password_confirmation: password_confirmation,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          })
+
+    },
+
     getFilteredList: (limit) => {
 
         return fetch(`https://fakestoreapi.com/products?limit=${limit}`)
+            .then(res => res.json())
+            .then(json => {
+                return serializeProductList(json);
+            })
+    },
+
+    getPages: (p) => {
+
+        return fetch(`https://fakestoreapi.com/products?page` + p)
             .then(res => res.json())
             .then(json => {
                 return serializeProductList(json);

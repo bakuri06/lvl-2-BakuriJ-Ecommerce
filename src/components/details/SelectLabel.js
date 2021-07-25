@@ -46,6 +46,7 @@ export default function SelectLabel() {
                     <option value={20}>Second category</option>
                     <option value={30}>Third category</option>
                     <option value={40}>Forth category</option>
+
                 </Select>
             </FormControl>
     )

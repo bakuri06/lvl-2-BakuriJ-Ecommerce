@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -13,7 +13,7 @@ import { HOMEPAGE } from '../../routes';
 import { PRODUCT_LIST } from '../../routes';
 import { SINGLE_LIST } from '../../routes';
 import { ADMIN } from '../../routes';
-import { PAGINATION } from './../../routes';
+import { UserContext } from './../../store/UserContextProvider';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +44,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({isAdmin}) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
+   const userData = useContext(UserContext);
+
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {

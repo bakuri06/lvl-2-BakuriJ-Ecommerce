@@ -9,146 +9,174 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignUpButton from "./SignUpButton";
+import * as Yup from "yup";
+import { Redirect } from "react-router-dom";
+import { SIGNIN } from "../routes";
+import Api from './../api/Api';
 
-function validatePassword(value) {
-  let error;
-  if (!value) {
-    error = "Required";
-  } else if (value.length < 8) {
-    error = "Invalid email address";
-  }
-  return error;
-}
+const SignupSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(5, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Required"),
+  password: Yup.string().required("Required"),
+  password_confirmation: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+});
 
 const SignUpForm = () => {
   const [checked, setChecked] = useState(false);
+  const [register, setIsRegister] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       password: "",
-      phoneNumber: "",
+      password_confirmation: "",
     },
+    validationSchema: SignupSchema,
 
-    onSubmit: (values) => {
-      console.log('sent');
+    onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
+      fetch("http://159.65.126.180/api/register", {
+            method: "POST",
+            body: JSON.stringify({
+              name: values.name,
+              email: values.email,
+              password: values.password,
+              password_confirmation: values.password_confirmation,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          })
+          
+        .then((json) => {
+          if (json.ok) {
+            setStatus(true);
+            setIsRegister(true);
+            resetForm();
+            alert("You succesfully registered");
+          } else {
+            alert("error");
+            return;
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          setErrors({ main: "Error" });
+        })
+        .finally(() => {
+          setSubmitting(true);
+        });
     },
   });
 
   return (
-    <form className="styling" Validate={validatePassword} onSubmit={formik.handleSubmit}>
-      <Box component="div" display="flex" justifyContent="space-between">
-        <TextField
-          id="firstName"
-          value={formik.values.firstName}
-          name="firstName"
-          type="text"
-          onChange={formik.handleChange}
-          label="First Name"
-          variant="outlined"
-          style={{ width: "49%" }}
-        />
-        {formik.errors.firstName ? <div>{formik.errors.firstName}</div> : null}
+    <>
+      {register ? (
+        <Redirect to={SIGNIN} />
+      ) : (
+        <form className="styling" onSubmit={formik.handleSubmit}>
+          <TextField
+            id="name"
+            value={formik.values.name}
+            name="name"
+            type="text"
+            onChange={formik.handleChange}
+            label="Name"
+            variant="outlined"
+          />
+          {formik.errors.name ? <div>{formik.errors.name}</div> : null}
 
-        <TextField
-          id="lastName"
-          value={formik.values.lastName}
-          name="lastName"
-          type="text"
-          onChange={formik.handleChange}
-          label="Last Name"
-          variant="outlined"
-          style={{ width: "49%" }}
-        />
-        {formik.errors.lastName ? <div>{formik.errors.lastName}</div> : null}
-      </Box>
+          <TextField
+            id="email"
+            value={formik.values.email}
+            name="email"
+            type="email"
+            onChange={formik.handleChange}
+            label="Your email"
+            variant="outlined"
+            style={{ marginTop: "20px" }}
+          />
+          {formik.errors.email ? <div>{formik.errors.email}</div> : null}
 
-      <TextField
-        id="email"
-        value={formik.values.email}
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        label="Your email"
-        variant="outlined"
-        style={{ marginTop: "20px" }}
-      />
-      {formik.errors.email ? <div>{formik.errors.email}</div> : null}
+          <TextField
+            id="password"
+            value={formik.values.password}
+            name="password"
+            type="password"
+            onChange={formik.handleChange}
+            label="Your password"
+            variant="outlined"
+            style={{ marginTop: "20px" }}
+            helperText="At least 8 characters and 1 digit"
+          />
+          {formik.errors.password ? <div>{formik.errors.password}</div> : null}
 
-      <TextField
-        id="password"
-        value={formik.values.password}
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        label="Your password"
-        variant="outlined"
-        style={{ marginTop: "20px" }}
-        helperText="At least 8 characters and 1 digit"
-      />
-      {formik.errors.password ? <div>{formik.errors.password}</div> : null}
+          <TextField
+            id="password_confirmation"
+            value={formik.values.password_confirmation}
+            name="password_confirmation"
+            type="password"
+            onChange={formik.handleChange}
+            label="Confirm Password"
+            variant="outlined"
+            style={{ marginTop: "20px" }}
+          />
+          {formik.errors.password_confirmation ? (
+            <div>{formik.errors.password_confirmation}</div>
+          ) : null}
 
-      <TextField
-        id="phoneNumber"
-        value={formik.values.phoneNumber}
-        name="phoneNumber"
-        type="number"
-        onChange={formik.handleChange}
-        label="Phone Number"
-        variant="outlined"
-        style={{ marginTop: "20px" }}
-        helperText="Optional - for two step authentication"
-      />
-      {formik.errors.phoneNumber ? (
-        <div>{formik.errors.phoneNumber}</div>
-      ) : null}
-
-      <Box component="div" display="flex" alignSelf='center' >
-        <FormControlLabel
-          style={{ color: "#6c757d"}}
-          control={
-            <Checkbox
-              checked={checked}
-              onChange={handleChange}
-              name="checked"
-              color="primary"
+          <Box component="div" display="flex" alignSelf="center">
+            <FormControlLabel
+              style={{ color: "#6c757d" }}
+              control={
+                <Checkbox
+                  checked={checked}
+                  onChange={handleChange}
+                  name="checked"
+                  color="primary"
+                />
+              }
+              label="Subscribe to our newsletter"
             />
-          }
-          label="Subscribe to our newsletter"
-        />
-      </Box>
+          </Box>
 
-      <Box
-        component="div"
-        display="flex"
-        alignItems="center"
-        flexDirection="column"
-      >
-        <SignUpButton />
+          <Box
+            component="div"
+            display="flex"
+            alignItems="center"
+            flexDirection="column"
+          >
+            <SignUpButton />
 
-        <p className="fixed">or sign in with:</p>
+            <p className="fixed">or sign in with:</p>
 
-        <div>
-          <Button>
-            <i className="fab fa-facebook-f second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-twitter second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-linkedin-in second"></i>
-          </Button>
-          <Button>
-            <i className="fab fa-github"></i>
-          </Button>
-        </div>
-      </Box>
-    </form>
+            <div>
+              <Button>
+                <i className="fab fa-facebook-f second"></i>
+              </Button>
+              <Button>
+                <i className="fab fa-twitter second"></i>
+              </Button>
+              <Button>
+                <i className="fab fa-linkedin-in second"></i>
+              </Button>
+              <Button>
+                <i className="fab fa-github"></i>
+              </Button>
+            </div>
+          </Box>
+        </form>
+      )}
+    </>
   );
 };
 

@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => {
 
 const Header = ({isAdmin}) => {
     const classes=useStyles();
-    console.log(isAdmin);
+
     return(
         <Container classes={{root:classes.noPadding}}maxWidth='xl' mb={4}>
             <Navbar isAdmin={isAdmin}/>

@@ -2,9 +2,10 @@ import { Box } from "@material-ui/core";
 import { Grid } from "@material-ui/core";
 import SelectLabel from "./SelectLabel";
 import "./label.css";
-import Paginate from "./paginate";
+import { Pagination } from "@material-ui/lab";
 
-const Label = ({ total,limit, onClick }) => {
+const Label = ({ onChange,total,limit }) => {
+
   return (
     <Grid
       item
@@ -26,10 +27,10 @@ const Label = ({ total,limit, onClick }) => {
           <Box className="fixx">
             <SelectLabel />
           </Box>
-        </Box>
+        </Box> 
       </Grid>
       <Grid item xs={5} md={4}>
-        <Paginate total={total} limit={limit} onClick={onClick} />
+        <Pagination onChange={(e, p) => onChange(e,p)} count={total/limit} />
       </Grid>
     </Grid>
   );
