@@ -12,7 +12,6 @@ import SignUpButton from "./SignUpButton";
 import * as Yup from "yup";
 import { Redirect } from "react-router-dom";
 import { SIGNIN } from "../routes";
-import Api from './../api/Api';
 
 const SignupSchema = Yup.object().shape({
   name: Yup.string()

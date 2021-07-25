@@ -12,7 +12,7 @@ import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
     root: {
-        width: '100%',
+        width: 'auto',
         marginRight: '20px',
         marginBottom: '20px'
     },

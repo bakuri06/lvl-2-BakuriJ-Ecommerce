@@ -9,13 +9,17 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignInButton from "./SignInButton";
-import Api from "./../api/Api";
-import ProductList from "./../pages/ProductList";
 import { Redirect } from "react-router-dom";
+import { PRODUCT_LIST } from "../routes";
+import { useContext } from "react";
+import { UserContext } from "../store/UserContextProvider";
+import data from "../api/data";
 
 const SignInForm = () => {
   const [checked, setChecked] = useState(false);
-  const [login, setIsLogin] = useState(false);
+  const userData = useContext(UserContext);
+
+  console.log(userData);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -37,16 +41,16 @@ const SignInForm = () => {
           "Accept": "application/json",
         },
       })
-        .then((res) => {
-          res.json();
-          console.log(res);
-        })
+        .then(res => res.json())
         .then((json) => {
           console.log("data: ", json);
           // localStorage.setItem("token", json.token.access_token);
           setStatus(true);
           resetForm();
-          setIsLogin(true);
+          userData.setData({
+            ...data,
+            isLoggedIn: true,
+          })
         })
         .catch((error) => {
           console.log(error);
@@ -59,8 +63,8 @@ const SignInForm = () => {
   });
   return (
     <>
-      {login ? (
-        <Redirect to={ProductList} />
+      {userData.data.isLoggedIn ? (
+        <Redirect to={PRODUCT_LIST} />
       ) : (
         <form className="styling" onSubmit={formik.handleSubmit}>
           <TextField
