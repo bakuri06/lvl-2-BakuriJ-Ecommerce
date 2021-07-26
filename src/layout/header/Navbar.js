@@ -46,6 +46,8 @@ export default function Navbar({ isAdmin }) {
   const [navbar, setNavbar] = useState(false);
   const userData = useContext(UserContext);
 
+  console.log(userData);
+
   const changeBackground = () => {
     if (window.scrollY >= 80) {
       setNavbar(true);
@@ -59,6 +61,14 @@ export default function Navbar({ isAdmin }) {
       ...data,
       isLoggedIn: false,
     });
+  };
+
+  const coutData = () => {
+    if (userData.data.isLoggedIn == true) {
+      userData.setData({
+        ...userData.data,
+      })
+    }
   };
 
   window.addEventListener("scroll", changeBackground);
@@ -96,8 +106,10 @@ export default function Navbar({ isAdmin }) {
               </li>
 
               <li>
-                <a href="#!">
-                  <span className="badge badge-pill">1</span>
+                <a href="#!" onClick={coutData}>
+                  <span className="badge badge-pill">
+                    {userData.data.counter}
+                  </span>
                   <i className="fas fa-shopping-cart pl-0"></i>
                 </a>
               </li>

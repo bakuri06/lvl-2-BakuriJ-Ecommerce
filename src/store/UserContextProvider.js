@@ -7,12 +7,15 @@ const UserContextProvider = ({ children }) => {
   let [data, setData] = useState({
     isLoggedIn: false,
     user: {},
+    counter:0,
+    product:[]
   });
+
   return (
     <UserContext.Provider
       value={{
           data,
-          setData
+          setData,
       }}
     >{children}</UserContext.Provider>
   );

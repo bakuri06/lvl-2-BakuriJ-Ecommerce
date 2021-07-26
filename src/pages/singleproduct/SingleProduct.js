@@ -1,23 +1,23 @@
 import React from 'react'
-import MainContent from '../layout/layouts/MainContent';
+import MainContent from '../../layout/layouts/MainContent';
 import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
 import { useState } from 'react';
 import { CardActionArea } from '@material-ui/core';
 import { CardMedia } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
-import { BasicTable } from '../components/details/BasicTable';
+import { BasicTable } from '../../components/details/BasicTable';
 import { Container } from '@material-ui/core';
-import Counter from '../components/details/Counter'
-import SelectedSize from '../components/details/SelectSize'
+import Counter from '../../components/details/Counter'
+import SelectedSize from '../../components/details/SelectSize'
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import Loader from '../components/Loader';
-import CustomizedButtons from '../components/details/CustomizedButtons';
-import NavTabs from '../components/NavTabs'
-import Api from '../api/Api';
-import useStyles from '../styles/SingleProductStyles'
-import '../sign/SignInForm.css'
+import Loader from '../../components/Loader';
+import CustomizedButtons from '../../components/details/CustomizedButtons';
+import NavTabs from '../../components/NavTabs'
+import Api from '../../api/Api';
+import useStyles from './SingleProductStyles'
+import '../signin/SignInForm.css'
 
 const SingleProduct = () => {
     const classes = useStyles();
@@ -34,7 +34,7 @@ const SingleProduct = () => {
             })
     }, [])
 
-    console.log(data);
+
 
     return (
         <MainContent>

@@ -1,5 +1,5 @@
 import React from 'react'
-import MainContent from '../layout/layouts/MainContent';
+import MainContent from '../../layout/layouts/MainContent';
 import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
 import { Container } from '@material-ui/core';

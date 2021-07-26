@@ -1,12 +1,12 @@
 import React from 'react'
-import MainContent from '../layout/layouts/MainContent';
+import MainContent from '../../layout/layouts/MainContent';
 import Grid from '@material-ui/core/Grid';
 import { Box } from '@material-ui/core';
-import useStyles from '../styles/SingleProductStyles'
-import '../sign/SignInForm.css'
-import SignInForm from './../sign/SignInForm';
+import useStyles from "../singleproduct/SingleProductStyles";
+import SignUpForm from './SignUpForm';
+import '../signin/SignInForm.css'
 
-const SignIn = () => {
+const SignUp = () => {
     const classes=useStyles();
 
     return (
@@ -14,14 +14,14 @@ const SignIn = () => {
             <Grid container>
                 <Grid item xs={12} lg={12} md={12}>
                     <Box component='div' className={classes.bannerColor} display='flex' justifyContent='center' mb={5}>
-                        <h3 className='main_banner'>Sign in</h3>
+                        <h3 className='main_banner'>Sign up</h3>
                     </Box>
                 </Grid>
             </Grid>
 
             <Grid container justifyContent='center'>
                 <Grid item md={5}>
-                    <SignInForm/>
+                    <SignUpForm/>
                 </Grid>
             </Grid>
 
@@ -29,4 +29,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn;
+export default SignUp;

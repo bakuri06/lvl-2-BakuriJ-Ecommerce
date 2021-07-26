@@ -7,11 +7,11 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
-import "./SignInForm.css";
+import '../signin/SignInForm.css'
 import SignUpButton from "./SignUpButton";
 import * as Yup from "yup";
 import { Redirect } from "react-router-dom";
-import { SIGNIN } from "../routes";
+import { SIGNIN } from "../../routes";
 
 
 const SignupSchema = Yup.object().shape({

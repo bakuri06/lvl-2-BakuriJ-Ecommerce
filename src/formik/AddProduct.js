@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import "../sign/Signup.css";
+import "../pages/signup/Signup.css";
 import { Button } from "@material-ui/core";
 
 const AddProduct = () => {

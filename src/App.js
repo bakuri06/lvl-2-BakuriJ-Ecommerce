@@ -1,11 +1,11 @@
 import React from 'react'
-import Home from "./pages/Home";
+import Home from './pages/home/Home';
 import ScrollToTop from './components/ScrollToTop';
-import ProductList from './pages/ProductList'
-import SingleProduct from './pages/SingleProduct'
-import AdminPanel from './pages/AdminPanel';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import ProductList from './pages/productlist/ProductList';
+import SingleProduct from './pages/singleproduct/SingleProduct'
+import SignIn from './pages/signin/SignIn'
+import SignUp from './pages/signup/SignUp'
+import AdminPanel from './pages/admin/AdminPanel';
 
 import {
     BrowserRouter as Router,

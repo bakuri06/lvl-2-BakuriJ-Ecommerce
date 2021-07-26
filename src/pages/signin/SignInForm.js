@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import "./Signup.css";
+import "../signup/Signup.css";
 import { Button } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -10,10 +10,11 @@ import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignInButton from "./SignInButton";
 import { Redirect } from "react-router-dom";
-import { PRODUCT_LIST } from "../routes";
+import { PRODUCT_LIST } from "../../routes";
 import { useContext } from "react";
-import { UserContext } from "../store/UserContextProvider";
-import data from "../api/data";
+import { UserContext } from "../../store/UserContextProvider";
+import data from '../../api/data'
+import Counter from './../../components/details/Counter';
 
 const SignInForm = () => {
   const [checked, setChecked] = useState(false);
@@ -49,7 +50,7 @@ const SignInForm = () => {
           setStatus(true);
           resetForm();
           userData.setData({
-            ...data,
+            ...userData.data,
             isLoggedIn: true,
           })
         })
