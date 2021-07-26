@@ -11,7 +11,6 @@ import productData from '../api/data'
 import Loader from '../components/Loader';
 import { useEffect } from 'react';
 import Api from '../api/Api'
-import dataa from '../api/data';
 
 const ProductList = () => {
     const [data, setData] = useState(productData);

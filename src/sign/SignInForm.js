@@ -44,7 +44,8 @@ const SignInForm = () => {
         .then(res => res.json())
         .then((json) => {
           console.log("data: ", json);
-          // localStorage.setItem("token", json.token.access_token);
+          localStorage.setItem("token", json.token.access_token);
+          localStorage.setItem("username", json.user.name);
           setStatus(true);
           resetForm();
           userData.setData({
@@ -105,7 +106,7 @@ const SignInForm = () => {
             />
 
             <p>
-              <a className="forgetPass" href="">
+              <a href='/register' className="forgetPass">
                 Forgot password?
               </a>
             </p>
@@ -121,7 +122,7 @@ const SignInForm = () => {
 
             <p className="fixed">
               Not a member?{" "}
-              <a href="" className="forgetPass">
+              <a href='/register' className="forgetPass">
                 Register
               </a>
             </p>

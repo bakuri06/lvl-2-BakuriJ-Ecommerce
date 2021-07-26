@@ -141,7 +141,7 @@ export default function NavTabs({ data: { title, price, img, id, description } }
         <Box className="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
           <h5><span>1</span> review for <span>Fantasy T-shirt</span></h5>
           <Box className="media mt-3 mb-4">
-            <img className="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" width="62" alt="Generic placeholder image" />
+            <img className="d-flex mr-3 z-depth-1" src="https://mdbootstrap.com/img/Photos/Others/placeholder1.jpg" width="62" alt="Generic placeholder" />
             <Box className="media-body">
               <Box component='div' display='flex' style={{ justifyContent: 'space-between' }}>
                 <p style={{ marginTop: '0px', marginBottom: '0px' }}>

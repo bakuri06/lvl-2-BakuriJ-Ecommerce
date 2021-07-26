@@ -13,6 +13,7 @@ import * as Yup from "yup";
 import { Redirect } from "react-router-dom";
 import { SIGNIN } from "../routes";
 
+
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(5, "Too Short!")

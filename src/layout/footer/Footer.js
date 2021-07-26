@@ -32,19 +32,19 @@ const Footer = () => {
 
                         <Box component='div' md={3} lg={3} xs={3}>
 
-                            <a class="fb-ic">
+                            <a href='https://www.facebook.com/' className="fb-ic">
                                 <i className="fab fa-facebook-f white-text mr-4"> </i>
                             </a>
-                            <a className="tw-ic">
+                            <a href='https://twitter.com/?lang=en' className="tw-ic">
                                 <i className="fab fa-twitter white-text mr-4"> </i>
                             </a>
-                            <a className="gplus-ic">
+                            <a href='https://www.google.com/' className="gplus-ic">
                                 <i className="fab fa-google-plus-g white-text mr-4"> </i>
                             </a>
-                            <a className="li-ic">
+                            <a href='https://www.linkedin.com/' className="li-ic">
                                 <i className="fab fa-linkedin-in white-text mr-4"> </i>
                             </a>
-                            <a className="ins-ic">
+                            <a href='https://www.instagram.com/' className="ins-ic">
                                 <i className="fab fa-instagram white-text"> </i>
                             </a>
 

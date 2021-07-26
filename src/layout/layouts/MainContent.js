@@ -3,7 +3,6 @@ import { Container } from '@material-ui/core';
 import Header from '../header/Header';
 import { makeStyles } from '@material-ui/core';
 import Footer from '../footer/Footer'
-import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => {
     return ({

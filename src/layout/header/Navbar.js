@@ -8,12 +8,13 @@ import "./style.css";
 import Flag from "./Flag";
 import { Link as MLink } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { HOMEPAGE } from "../../routes";
+import { HOMEPAGE, SIGNIN, SIGNUP } from "../../routes";
 import { PRODUCT_LIST } from "../../routes";
 import { SINGLE_LIST } from "../../routes";
 import { ADMIN } from "../../routes";
 import { UserContext } from "./../../store/UserContextProvider";
 import data from "../../api/data";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -110,25 +111,32 @@ export default function Navbar({ isAdmin }) {
                 <a href="#!">Contact</a>
               </li>
               {userData.data.isLoggedIn ? (
-                <div>
-                  <img src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"></img>
+                <Box component="div" display="flex" alignItems="center">
+                  <Box component="div" mr={2}>
+                    <img
+                      className="avatar"
+                      src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
+                      alt="this logo"
+                    ></img>
+                    <span>{localStorage.getItem("username")}</span>
+                  </Box>
                   <Button
-                    href="/register"
+                    href={PRODUCT_LIST}
                     variant="outlined"
                     className={classes.button}
                     onClick={Logout}
                   >
                     Log out
                   </Button>
-                </div>
+                </Box>
               ) : (
                 <>
                   <li>
-                    <a href="/login">Sign in</a>
+                    <a href={SIGNIN}>Sign in</a>
                   </li>
                   <li>
                     <Button
-                      href="/register"
+                      href={SIGNUP}
                       variant="outlined"
                       className={classes.button}
                     >
