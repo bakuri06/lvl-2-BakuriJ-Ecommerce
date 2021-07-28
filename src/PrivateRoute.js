@@ -4,12 +4,12 @@ import { useContext } from "react";
 import { UserContext } from "./store/UserContextProvider";
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-  const userContext = useContext(UserContext);
+  const token = localStorage.getItem("token");
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (userContext.isLoggedIn) {
+        if (token) {
           return <Component {...props} />;
         } else {
           return (

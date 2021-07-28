@@ -26,7 +26,7 @@ const App = () => {
       <Switch>
         <Route path={PRODUCT_LIST} component={ProductList} />
         <Route path={SINGLE_LIST} component={SingleProduct} />
-        <Route path={ADMIN} component={AdminPanel} />
+        <PrivateRoute path={ADMIN} component={AdminPanel} />
         <Route path={SIGNUP} component={SignUp} />
         <Route path={SIGNIN} component={SignIn} />
         <Route path={HOMEPAGE} component={Home} />
