@@ -111,7 +111,6 @@ export default function CustomizedButtons() {
       counter:userData.data.counter + 1,
       product:[data,...userData.data.product]
     })
-
   };
 
   return (

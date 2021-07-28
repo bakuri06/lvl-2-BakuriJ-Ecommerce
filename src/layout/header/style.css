@@ -61,6 +61,11 @@ a{
     margin-right:5px;
 }
 
+.coutdatas{
+    display: flex;
+    align-items: center;
+}
+
 .flexed{
     display:flex;
     align-items: center;

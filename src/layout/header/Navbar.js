@@ -7,7 +7,7 @@ import { Button } from "@material-ui/core";
 import "./style.css";
 import Flag from "./Flag";
 import { Link as MLink } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { HOMEPAGE, SIGNIN, SIGNUP } from "../../routes";
 import { PRODUCT_LIST } from "../../routes";
 import { SINGLE_LIST } from "../../routes";
@@ -15,6 +15,7 @@ import { ADMIN } from "../../routes";
 import { UserContext } from "./../../store/UserContextProvider";
 import data from "../../api/data";
 import { Box } from "@material-ui/core";
+import Products from "./Products";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -45,8 +46,8 @@ export default function Navbar({ isAdmin }) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
   const userData = useContext(UserContext);
-
-  console.log(userData);
+  const token = localStorage.getItem('token');
+  console.log(token);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -61,6 +62,7 @@ export default function Navbar({ isAdmin }) {
       ...data,
       isLoggedIn: false,
     });
+    localStorage.removeItem('token');
   };
 
   const coutData = () => {
@@ -69,7 +71,10 @@ export default function Navbar({ isAdmin }) {
         ...userData.data,
       })
     }
+
+    console.log(userData.data.product);
   };
+
 
   window.addEventListener("scroll", changeBackground);
 
@@ -106,10 +111,8 @@ export default function Navbar({ isAdmin }) {
               </li>
 
               <li>
-                <a href="#!" onClick={coutData}>
-                  <span className="badge badge-pill">
-                    {userData.data.counter}
-                  </span>
+                <a href="#!" className='coutdatas' onClick={coutData}>
+                  <Products/>
                   <i className="fas fa-shopping-cart pl-0"></i>
                 </a>
               </li>
@@ -122,7 +125,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <a href="#!">Contact</a>
               </li>
-              {userData.data.isLoggedIn ? (
+              {token ? (
                 <Box component="div" display="flex" alignItems="center">
                   <Box component="div" mr={2}>
                     <img
@@ -130,7 +133,6 @@ export default function Navbar({ isAdmin }) {
                       src="https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png"
                       alt="this logo"
                     ></img>
-                    <span>{localStorage.getItem("username")}</span>
                   </Box>
                   <Button
                     href={PRODUCT_LIST}
