@@ -47,7 +47,6 @@ export default function Navbar({ isAdmin }) {
   const [navbar, setNavbar] = useState(false);
   const userData = useContext(UserContext);
   const token = localStorage.getItem('token');
-  console.log(token);
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -61,6 +60,7 @@ export default function Navbar({ isAdmin }) {
     userData.setData({
       ...data,
       isLoggedIn: false,
+      isLoggingIn:false,
     });
     localStorage.removeItem('token');
   };

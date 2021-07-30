@@ -7,80 +7,26 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
-import '../signin/SignInForm.css'
+import "../signin/SignInForm.css";
 import SignUpButton from "./SignUpButton";
 import * as Yup from "yup";
 import { Redirect } from "react-router-dom";
 import { SIGNIN } from "../../routes";
+import Api from "../../api/Api";
+import { formikValue } from './signupformik';
 
-
-const SignupSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(5, "Too Short!")
-    .max(50, "Too Long!")
-    .required("Required"),
-  password: Yup.string().required("Required"),
-  password_confirmation: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
-});
 
 const SignUpForm = () => {
   const [checked, setChecked] = useState(false);
-  const [register, setIsRegister] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
   };
-  const formik = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      password_confirmation: "",
-    },
-    validationSchema: SignupSchema,
-
-    onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-      fetch("http://159.65.126.180/api/register", {
-            method: "POST",
-            body: JSON.stringify({
-              name: values.name,
-              email: values.email,
-              password: values.password,
-              password_confirmation: values.password_confirmation,
-            }),
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          })
-          
-        .then((json) => {
-          if (json.ok) {
-            setStatus(true);
-            setIsRegister(true);
-            resetForm();
-            alert("You succesfully registered");
-          } else {
-            alert("error");
-            return;
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          setErrors({ main: "Error" });
-        })
-        .finally(() => {
-          setSubmitting(true);
-        });
-    },
-  });
+  const formik = useFormik(formikValue);
 
   return (
     <>
-      {register ? (
+      {formik.isSubmitting ? (
         <Redirect to={SIGNIN} />
       ) : (
         <form className="styling" onSubmit={formik.handleSubmit}>

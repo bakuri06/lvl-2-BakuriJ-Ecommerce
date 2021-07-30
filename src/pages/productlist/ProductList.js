@@ -43,13 +43,11 @@ const ProductList = () => {
 
   useEffect(() => {
     setLoading(true);
-    Api.getProductList()
+    Api.getProductList("products")
       .then((resp) => {
+        console.log(resp);
         setData(resp);
-        localStorage.setItem("isLoggedIn", userData.data.isLoggedIn);
       })
-
-      .catch((err) => console.log(err))
       .finally(() => {
         setLoading(false);
       });

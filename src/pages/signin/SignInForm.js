@@ -15,6 +15,7 @@ import { useContext } from "react";
 import { UserContext } from "../../store/UserContextProvider";
 import data from "../../api/data";
 import Counter from "./../../components/details/Counter";
+import Api from "../../api/Api";
 
 const SignInForm = () => {
   const [checked, setChecked] = useState(false);
@@ -32,18 +33,7 @@ const SignInForm = () => {
       password: "",
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-      fetch("http://159.65.126.180/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: values.email,
-          password: values.password,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((res) => res.json())
+      Api.signInApi(values.email, values.password)
         .then((json) => {
           console.log("data: ", json);
           localStorage.setItem("token", json.token.access_token);
@@ -53,6 +43,8 @@ const SignInForm = () => {
           userData.setData({
             ...userData.data,
             isLoggedIn: true,
+            user: json.user,
+            isLoggingIn: true,
           });
         })
         .catch((error) => {
@@ -60,12 +52,11 @@ const SignInForm = () => {
           setErrors({ main: "Error" });
         })
         .finally(() => {
-          console.log(userData.data.isLoggedIn)
           setSubmitting(true);
         });
     },
   });
-  
+
   return (
     <>
       <form className="styling" onSubmit={formik.handleSubmit}>

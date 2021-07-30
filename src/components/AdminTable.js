@@ -58,7 +58,7 @@ export default function AdminTable() {
 
   useEffect(() => {
     setLoading(true);
-    Api.getProductList()
+    Api.getProductList('products')
       .then((resp) => setData(resp))
       .catch((err) => console.log(err))
       .finally(() => {
