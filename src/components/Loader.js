@@ -3,8 +3,8 @@ import './loader.css'
 const Loader = ({ isLoading, children }) => {
   if (isLoading)
     return (
-      <div className="lds-heart">
-        <div></div>
+      <div>
+        <div>...Loading</div>
       </div>
     );
 

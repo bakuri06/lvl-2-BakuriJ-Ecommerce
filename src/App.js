@@ -6,6 +6,7 @@ import SingleProduct from "./pages/singleproduct/SingleProduct";
 import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import AdminPanel from "./pages/admin/AdminPanel";
+import ShoppingCart from "./pages/shopingcart/ShopingCart";
 import { PrivateRoute } from "./PrivateRoute";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -17,6 +18,7 @@ import {
   SINGLE_LIST,
   ADMIN,
   SIGNUP,
+  SHOPPINGCART,
 } from "./routes";
 
 const token = localStorage.getItem("token");
@@ -61,6 +63,7 @@ const App = () => {
         <PrivateRoute path={ADMIN} component={AdminPanel} />
         <Route path={SIGNUP} component={SignUp} />
         <Route path={SIGNIN} component={SignIn} />
+        <PrivateRoute path={SHOPPINGCART} component={ShoppingCart} />
         <Route path={HOMEPAGE} component={Home} />
       </Switch>
     </Router>

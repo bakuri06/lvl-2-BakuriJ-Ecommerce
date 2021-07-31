@@ -8,7 +8,7 @@ import "./style.css";
 import Flag from "./Flag";
 import { Link as MLink } from "@material-ui/core";
 import { Link, Redirect } from "react-router-dom";
-import { HOMEPAGE, SIGNIN, SIGNUP } from "../../routes";
+import { HOMEPAGE, SHOPPINGCART, SIGNIN, SIGNUP } from "../../routes";
 import { PRODUCT_LIST } from "../../routes";
 import { SINGLE_LIST } from "../../routes";
 import { ADMIN } from "../../routes";
@@ -34,8 +34,7 @@ const useStyles = makeStyles((theme) => ({
   paint: {
     backgroundColor: "#fff",
     transition: "0.6s",
-    color:'black'
-    
+    color: "black",
   },
   button: {
     color: "black",
@@ -112,10 +111,10 @@ export default function Navbar({ isAdmin }) {
               </li>
 
               <li>
-                <a href="#!" className="coutdatas" onClick={coutData}>
-                  <Products />
-                  <i className="fas fa-shopping-cart pl-0"></i>
-                </a>
+                <i className="fas fa-shopping-cart pl-0"></i>
+                <MLink component={Link} to={SHOPPINGCART}>
+                  <i className="badge-pill">{userData.data.counter}</i>
+                </MLink>
               </li>
               <li>
                 <Flag />
