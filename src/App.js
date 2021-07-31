@@ -19,8 +19,7 @@ import {
   SIGNUP,
 } from "./routes";
 
-let token = localStorage.getItem("token");
-console.log(token);
+const token = localStorage.getItem("token");
 
 const App = () => {
   useEffect(() => {
@@ -40,7 +39,7 @@ const App = () => {
           if (!resp.ok) {
             resp.text().then((text) => {
               throw Error(text);
-              localStorage.removeItem('token');
+              localStorage.removeItem("token");
             });
           } else {
             return resp.json();

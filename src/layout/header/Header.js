@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => {
     });
 });
 
-const Header = ({isAdmin}) => {
+const Header = ({isAdmin,isSinglePage}) => {
     const classes=useStyles();
 
     return(
         <Container classes={{root:classes.noPadding}}maxWidth='xl' mb={4}>
-            <Navbar isAdmin={isAdmin}/>
+            <Navbar isAdmin={isAdmin} isSinglePage={isSinglePage}/>
         </Container>
     )
 }

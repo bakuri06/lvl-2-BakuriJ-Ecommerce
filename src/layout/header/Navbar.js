@@ -34,6 +34,8 @@ const useStyles = makeStyles((theme) => ({
   paint: {
     backgroundColor: "#fff",
     transition: "0.6s",
+    color:'black'
+    
   },
   button: {
     color: "black",
@@ -46,7 +48,7 @@ export default function Navbar({ isAdmin }) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
   const userData = useContext(UserContext);
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -60,21 +62,20 @@ export default function Navbar({ isAdmin }) {
     userData.setData({
       ...data,
       isLoggedIn: false,
-      isLoggingIn:false,
+      isLoggingIn: false,
     });
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
   };
 
   const coutData = () => {
     if (userData.data.isLoggedIn == true) {
       userData.setData({
         ...userData.data,
-      })
+      });
     }
 
     console.log(userData.data.product);
   };
-
 
   window.addEventListener("scroll", changeBackground);
 
@@ -111,8 +112,8 @@ export default function Navbar({ isAdmin }) {
               </li>
 
               <li>
-                <a href="#!" className='coutdatas' onClick={coutData}>
-                  <Products/>
+                <a href="#!" className="coutdatas" onClick={coutData}>
+                  <Products />
                   <i className="fas fa-shopping-cart pl-0"></i>
                 </a>
               </li>
@@ -125,7 +126,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <a href="#!">Contact</a>
               </li>
-              {token ? (
+              {userData.data.isLoggingIn ? (
                 <Box component="div" display="flex" alignItems="center">
                   <Box component="div" mr={2}>
                     <img
