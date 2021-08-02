@@ -23,16 +23,13 @@ export const formikValue = {
   },
   validationSchema: SignupSchema,
 
-  onSubmit: (
-    values,
-    { setStatus, resetForm, setErrors, setSubmitting }
-  ) => {
-    Api.signUpApi(
-      values.name,
-      values.email,
-      values.password,
-      values.password_confirmation
-    )
+  onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
+    Api.signUpApi({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      password_confirmation: values.password_confirmation,
+    })
       .then((json) => {
         if (json.ok) {
           setStatus(true);

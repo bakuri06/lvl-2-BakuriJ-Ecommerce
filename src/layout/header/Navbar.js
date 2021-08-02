@@ -78,6 +78,8 @@ export default function Navbar({ isAdmin }) {
 
   window.addEventListener("scroll", changeBackground);
 
+  console.log(userData);
+
   return (
     <div className={classes.root}>
       <AppBar
@@ -125,7 +127,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <a href="#!">Contact</a>
               </li>
-              {userData.data.isLoggingIn ? (
+              {userData.data.isLoggedIn ? (
                 <Box component="div" display="flex" alignItems="center">
                   <Box component="div" mr={2}>
                     <img

@@ -60,7 +60,9 @@ export default function AdminTable() {
     setLoading(true);
     Api.getProductList('products')
       .then((resp) => setData(resp))
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log("Caught it: ", err)
+      })
       .finally(() => {
         setLoading(false);
       });

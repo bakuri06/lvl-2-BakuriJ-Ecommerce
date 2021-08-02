@@ -21,6 +21,7 @@ const SignInForm = () => {
   const [checked, setChecked] = useState(false);
   const userData = useContext(UserContext);
   const history = useHistory();
+  let temp;
 
   console.log(userData);
 
@@ -33,19 +34,24 @@ const SignInForm = () => {
       password: "",
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-      Api.signInApi(values.email, values.password)
+      Api.signInApi({
+        email: values.email,
+        password: values.password,
+      })
         .then((json) => {
           console.log("data: ", json);
           localStorage.setItem("token", json.token.access_token);
           setStatus(true);
           resetForm();
           history.push("/product_list");
-          userData.setData({
+          temp = {
             ...userData.data,
-            isLoggedIn: true,
             user: json.user,
+            isLoggedIn: true,
             isLoggingIn: true,
-          });
+          };
+
+          userData.setData(temp);
         })
         .catch((error) => {
           console.log(error);
@@ -53,6 +59,12 @@ const SignInForm = () => {
         })
         .finally(() => {
           setSubmitting(true);
+          temp = {
+            ...temp,
+            isLoggingIn: false,
+          };
+          userData.setData(temp);
+          console.log(temp);
         });
     },
   });

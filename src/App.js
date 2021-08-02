@@ -8,6 +8,7 @@ import SignUp from "./pages/signup/SignUp";
 import AdminPanel from "./pages/admin/AdminPanel";
 import ShoppingCart from "./pages/shopingcart/ShopingCart";
 import { PrivateRoute } from "./PrivateRoute";
+import Api from "./api/Api";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -21,6 +22,9 @@ import {
   SHOPPINGCART,
 } from "./routes";
 
+import { useContext } from "react";
+import { UserContext } from "./store/UserContextProvider";
+
 const token = localStorage.getItem("token");
 
 const App = () => {
@@ -28,24 +32,20 @@ const App = () => {
     isTokenAllowed();
   }, []);
 
+  const userData = useContext(UserContext);
+
   const isTokenAllowed = () => {
     if (token) {
-      fetch("http://159.65.126.180/api/auth/me", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((resp) => {
-          if (!resp.ok) {
-            resp.text().then((text) => {
-              throw Error(text);
-              localStorage.removeItem("token");
-            });
-          } else {
-            return resp.json();
-          }
+      Api.getMe(token)
+        .then((json) => {
+          console.log(json);
+          userData.setData({
+            ...userData.data,
+            user: json,
+            product:userData.data.product,
+            isLoggedIn: true,
+            isLoggingIn: false,
+          });
         })
         .catch((err) => {
           console.log("Caught it: ", err);

@@ -48,6 +48,9 @@ const ProductList = () => {
         console.log(resp);
         setData(resp);
       })
+      .catch((err) => {
+        console.log("Caught it: ", err);
+      })
       .finally(() => {
         setLoading(false);
       });
