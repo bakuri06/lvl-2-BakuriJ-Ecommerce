@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import "../signup/Signup.css";
 import { Button } from "@material-ui/core";
@@ -9,12 +9,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignInButton from "./SignInButton";
-import { Redirect, useHistory } from "react-router-dom";
-import { PRODUCT_LIST } from "../../routes";
+import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../store/UserContextProvider";
-import data from "../../api/data";
-import Counter from "./../../components/details/Counter";
 import Api from "../../api/Api";
 
 const SignInForm = () => {

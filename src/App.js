@@ -7,7 +7,7 @@ import SignIn from "./pages/signin/SignIn";
 import SignUp from "./pages/signup/SignUp";
 import AdminPanel from "./pages/admin/AdminPanel";
 import ShoppingCart from "./pages/shopingcart/ShopingCart";
-import { PrivateRoute } from "./PrivateRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
 import Api from "./api/Api";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
