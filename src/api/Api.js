@@ -50,7 +50,7 @@ const Api = {
     });
   },
 
-  getProductList: function (url) {
+  getProductList: (url) => {
     return Api.getData(url).then((json) => {
       return serializeProductList(json.data);
     });
@@ -82,7 +82,7 @@ const Api = {
   },
 
   getMe: (token) => {
-    return Api.getData("auth/me", undefined, token);
+    return Api.getData("auth/me", undefined,'POST', token);
   },
 };
 

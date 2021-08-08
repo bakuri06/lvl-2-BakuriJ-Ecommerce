@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import { Box } from "@material-ui/core";
 import useStyles from "../singleproduct/SingleProductStyles";
 import "./SignInForm.css";
-import SignInForm from "./SignInForm";
+import SignInForm from './SignInForm';
 
 const SignIn = () => {
   const classes = useStyles();

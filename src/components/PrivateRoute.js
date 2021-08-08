@@ -1,17 +1,18 @@
 import React from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../store/UserContextProvider";
 import Loader from "./Loader";
+import { useSelector } from 'react-redux';
+import { selectUser } from "../store/user/userSelector";
 export const PrivateRoute = ({ component: Component, ...rest }) => {
-  const userData = useContext(UserContext);
+  const data = useSelector(selectUser)
+  console.log(data);
   return (
     <Route
       {...rest}
       render={(props) => {
-        if (userData.data.user.hasOwnProperty("name")) {
+        if (data.user.hasOwnProperty("name")) {
           return (
-            <Loader isLoading={userData.data.isLoggingIn}>
+            <Loader isLoading={data.isLoggingIn}>
               <Component {...props} />
             </Loader>
           );

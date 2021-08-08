@@ -13,11 +13,19 @@ import { useHistory } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../store/UserContextProvider";
 import Api from "../../api/Api";
+import {
+  setLogin,
+  setLoginIn,
+  setToken,
+  setUser,
+} from "../../store/user/userActionCreator";
+import { useDispatch } from "react-redux";
 
-const SignInForm = () => {
+const SignInTest = () => {
   const [checked, setChecked] = useState(false);
   const userData = useContext(UserContext);
   const history = useHistory();
+  let dispatch = useDispatch();
   let temp;
 
   console.log(userData);
@@ -31,24 +39,17 @@ const SignInForm = () => {
       password: "",
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-      Api.signInApi({
-        email: values.email,
-        password: values.password,
-      })
-        .then((json) => {
-          console.log("data: ", json);
-          localStorage.setItem("token", json.token.access_token);
+      Api.signInApi({ email: values.email, password: values.password })
+        .then((data) => {
+          console.log("data: ", data);
+          localStorage.setItem("token", data.token.access_token);
           setStatus(true);
           resetForm();
           history.push("/product_list");
-          temp = {
-            ...userData.data,
-            user: json.user,
-            isLoggedIn: true,
-            isLoggingIn: true,
-          };
-
-          userData.setData(temp);
+          dispatch(setUser(data.user));
+          dispatch(setToken(data.token.access_token));
+          dispatch(setLogin(true));
+          dispatch(setLoginIn(true));
         })
         .catch((error) => {
           console.log(error);
@@ -60,9 +61,13 @@ const SignInForm = () => {
             ...temp,
             isLoggingIn: false,
           };
+          dispatch(setLoginIn(false));
           userData.setData(temp);
-          console.log(temp);
         });
+      Api.signInApi({
+        email: values.email,
+        password: values.password,
+      });
     },
   });
 
@@ -150,4 +155,4 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+export default SignInTest;

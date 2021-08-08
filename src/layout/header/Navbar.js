@@ -15,7 +15,11 @@ import { ADMIN } from "../../routes";
 import { UserContext } from "./../../store/UserContextProvider";
 import data from "../../api/data";
 import { Box } from "@material-ui/core";
-import Products from "./Products";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/userSelector";
+import { useDispatch } from "react-redux";
+import { SET_LOGED } from "./../../store/user/userConsts";
+import { setLogin, setLoginIn } from "./../../store/user/userActionCreator";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +51,8 @@ export default function Navbar({ isAdmin }) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
   const userData = useContext(UserContext);
-  const token = localStorage.getItem("token");
+  const user = useSelector(selectUser);
+  let dispatch = useDispatch();
 
   const changeBackground = () => {
     if (window.scrollY >= 80) {
@@ -58,27 +63,12 @@ export default function Navbar({ isAdmin }) {
   };
 
   const Logout = () => {
-    userData.setData({
-      ...data,
-      isLoggedIn: false,
-      isLoggingIn: false,
-    });
+    setLogin(false);
+    setLoginIn(false);
     localStorage.removeItem("token");
   };
 
-  const coutData = () => {
-    if (userData.data.isLoggedIn == true) {
-      userData.setData({
-        ...userData.data,
-      });
-    }
-
-    console.log(userData.data.product);
-  };
-
   window.addEventListener("scroll", changeBackground);
-
-  console.log(userData);
 
   return (
     <div className={classes.root}>
@@ -115,7 +105,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <i className="fas fa-shopping-cart pl-0"></i>
                 <MLink component={Link} to={SHOPPINGCART}>
-                  <i className="badge-pill">{userData.data.counter}</i>
+                  <i className="badge-pill">{user.counter}</i>
                 </MLink>
               </li>
               <li>
@@ -127,7 +117,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <a href="#!">Contact</a>
               </li>
-              {userData.data.isLoggedIn ? (
+              {user.isLoggedIn ? (
                 <Box component="div" display="flex" alignItems="center">
                   <Box component="div" mr={2}>
                     <img

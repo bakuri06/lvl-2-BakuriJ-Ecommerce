@@ -17,8 +17,6 @@ import { useContext } from "react";
 const ProductList = () => {
   const [data, setData] = useState(productData);
   const [loading, setLoading] = useState(false);
-  const userData = useContext(UserContext);
-  console.log(userData);
   const [page, setPage] = useState({
     page: 1,
     total: 100,
@@ -45,7 +43,6 @@ const ProductList = () => {
     setLoading(true);
     Api.getProductList("products")
       .then((resp) => {
-        console.log(resp);
         setData(resp);
       })
       .catch((err) => {

@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { UserContext } from "./../../store/UserContextProvider";
-import { useContext } from "react";
 import Api from "../../api/Api";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUser } from './../../store/user/userSelector';
+import { addToCart } from "../../store/user/userActionCreator";
 
 const BootstrapButton = withStyles({
   root: {
@@ -93,9 +94,10 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedButtons() {
   const classes = useStyles();
-
-  const userData = useContext(UserContext);
   const [data,setData] = useState([]);
+  let dispatch = useDispatch();
+  const user = useSelector(selectUser)
+  let counter = 0;
 
 
   const { id } = useParams();
@@ -105,12 +107,10 @@ export default function CustomizedButtons() {
             .catch(err => console.log(err))
     }, [])
 
-  const addToCart = () => {
-    userData.setData({
-      ...userData.data,
-      counter:userData.data.counter + 1,
-      product:[data,...userData.data.product]
-    })
+  const addTo = () => {
+    counter++;
+    console.log(counter);
+    dispatch(addToCart(counter));
   };
 
   return (
@@ -124,9 +124,9 @@ export default function CustomizedButtons() {
         Buy now
       </BootstrapButton>
 
-      {userData.data.isLoggedIn ? (
+      {user.isLoggedIn ? (
         <SecondButton
-          onClick={addToCart}
+          onClick={() => addTo()}
           variant="contained"
           color="primary"
           disableRipple

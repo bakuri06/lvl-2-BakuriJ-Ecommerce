@@ -19,7 +19,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { CardActions } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
-import { UserContext } from "./../../store/UserContextProvider";
+import { useSelector } from 'react-redux';
+import { selectUser } from './../../store/user/userSelector';
 
 const useSecondStyles = makeStyles({
   root: {
@@ -47,7 +48,7 @@ const ShoppingCart = () => {
   const classes = useStyles();
   const secondClasses = useSecondStyles();
   const [loading, setLoading] = useState(false);
-  const userData = useContext(UserContext);
+  const user = useSelector(selectUser)
   let totalPrice = 0;
 
   return (
@@ -69,9 +70,9 @@ const ShoppingCart = () => {
       <Grid container>
         <Loader isLoading={loading}>
           <Container maxWidth="lg" style={{ position: "relative" }}>
-            {userData.data.product.length > 0 ? (
+            {user.product.length > 0 ? (
               <Grid container>
-                {userData.data.product.map((el) => {
+                {user.product.map((el) => {
                   return (
                     <>
                       <Grid item xs={8} md={8}>
@@ -156,7 +157,7 @@ const ShoppingCart = () => {
                         variant="h5"
                       >
                         The Total Amount Of{" "}
-                        {userData.data.product.map((el) => {
+                        {user.product.map((el) => {
                           totalPrice += el.price;
                         })}
                         {totalPrice}$

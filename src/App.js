@@ -9,6 +9,7 @@ import AdminPanel from "./pages/admin/AdminPanel";
 import ShoppingCart from "./pages/shopingcart/ShopingCart";
 import { PrivateRoute } from "./components/PrivateRoute";
 import Api from "./api/Api";
+import { useSelector } from "react-redux";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
@@ -22,30 +23,29 @@ import {
   SHOPPINGCART,
 } from "./routes";
 
-import { useContext } from "react";
-import { UserContext } from "./store/UserContextProvider";
+import { useDispatch } from "react-redux";
+import { selectUser } from "./store/user/userSelector";
+import { setLoginIn,setLogin,setUser } from "./store/user/userActionCreator";
+
 
 const token = localStorage.getItem("token");
 
 const App = () => {
+  let dispatch = useDispatch();
   useEffect(() => {
     isTokenAllowed();
   }, []);
 
-  const userData = useContext(UserContext);
+  const user = useSelector(selectUser);
 
   const isTokenAllowed = () => {
     if (token) {
       Api.getMe(token)
         .then((json) => {
-          console.log(json);
-          userData.setData({
-            ...userData.data,
-            user: json,
-            product:userData.data.product,
-            isLoggedIn: true,
-            isLoggingIn: false,
-          });
+          console.log(json)
+          dispatch(setLoginIn(false));
+          dispatch(setLogin(true));
+          dispatch(setUser(json));
         })
         .catch((err) => {
           console.log("Caught it: ", err);
