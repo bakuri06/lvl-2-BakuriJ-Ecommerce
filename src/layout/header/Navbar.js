@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -12,13 +12,10 @@ import { HOMEPAGE, SHOPPINGCART, SIGNIN, SIGNUP } from "../../routes";
 import { PRODUCT_LIST } from "../../routes";
 import { SINGLE_LIST } from "../../routes";
 import { ADMIN } from "../../routes";
-import { UserContext } from "./../../store/UserContextProvider";
-import data from "../../api/data";
 import { Box } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/userSelector";
 import { useDispatch } from "react-redux";
-import { SET_LOGED } from "./../../store/user/userConsts";
 import { setLogin, setLoginIn } from "./../../store/user/userActionCreator";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Navbar({ isAdmin }) {
   const classes = useStyles();
   const [navbar, setNavbar] = useState(false);
-  const userData = useContext(UserContext);
   const user = useSelector(selectUser);
   let dispatch = useDispatch();
 

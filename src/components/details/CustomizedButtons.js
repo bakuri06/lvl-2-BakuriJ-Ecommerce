@@ -5,9 +5,10 @@ import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Api from "../../api/Api";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectUser } from './../../store/user/userSelector';
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "./../../store/user/userSelector";
 import { addToCart } from "../../store/user/userActionCreator";
+import { addProduct } from "./../../store/user/userActionCreator";
 
 const BootstrapButton = withStyles({
   root: {
@@ -94,23 +95,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomizedButtons() {
   const classes = useStyles();
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
   let dispatch = useDispatch();
-  const user = useSelector(selectUser)
-  let counter = 0;
-
+  const user = useSelector(selectUser);
 
   const { id } = useParams();
-    useEffect(() => {
-        Api.getSingleItem(id)
-        .then(resp => setData(resp))
-            .catch(err => console.log(err))
-    }, [])
+  useEffect(() => {
+    Api.getSingleItem(id)
+      .then((resp) => setData(resp))
+      .catch((err) => console.log(err));
+  }, []);
 
   const addTo = () => {
+    let counter = 0;
     counter++;
     console.log(counter);
     dispatch(addToCart(counter));
+    dispatch(addProduct(data));
   };
 
   return (

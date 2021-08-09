@@ -11,8 +11,6 @@ import productData from "../../api/data";
 import Loader from "../../components/Loader";
 import { useEffect } from "react";
 import Api from "../../api/Api";
-import { UserContext } from "../../store/UserContextProvider";
-import { useContext } from "react";
 
 const ProductList = () => {
   const [data, setData] = useState(productData);

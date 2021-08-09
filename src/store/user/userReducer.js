@@ -4,6 +4,7 @@ import {
   SET_LOGED,
   SET_LOGININ,
   ADD_CART,
+  ADD_PRODUCT,
 } from "./userConsts";
 
 const initialState = {
@@ -44,6 +45,11 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         token: action.token,
+      };
+    case ADD_PRODUCT:
+      return {
+        ...state,
+        product: [...state.product, action.product],
       };
     default:
       return state;

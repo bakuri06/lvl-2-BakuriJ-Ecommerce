@@ -50,6 +50,7 @@ const ShoppingCart = () => {
   const [loading, setLoading] = useState(false);
   const user = useSelector(selectUser)
   let totalPrice = 0;
+  console.log(user.product);
 
   return (
     <MainContent>

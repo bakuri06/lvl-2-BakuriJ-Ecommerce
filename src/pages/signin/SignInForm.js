@@ -10,8 +10,6 @@ import { Box } from "@material-ui/core";
 import "./SignInForm.css";
 import SignInButton from "./SignInButton";
 import { useHistory } from "react-router-dom";
-import { useContext } from "react";
-import { UserContext } from "../../store/UserContextProvider";
 import Api from "../../api/Api";
 import {
   setLogin,
@@ -23,12 +21,8 @@ import { useDispatch } from "react-redux";
 
 const SignInTest = () => {
   const [checked, setChecked] = useState(false);
-  const userData = useContext(UserContext);
   const history = useHistory();
   let dispatch = useDispatch();
-  let temp;
-
-  console.log(userData);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
@@ -57,12 +51,7 @@ const SignInTest = () => {
         })
         .finally(() => {
           setSubmitting(true);
-          temp = {
-            ...temp,
-            isLoggingIn: false,
-          };
           dispatch(setLoginIn(false));
-          userData.setData(temp);
         });
       Api.signInApi({
         email: values.email,
