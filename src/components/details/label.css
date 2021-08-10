@@ -15,3 +15,9 @@
 .fa-th-list,.fa-th-large{
     color:black;
 }
+
+@media screen and (max-width: 600px) {
+    .empty2 {
+      display: none;
+    }
+  }

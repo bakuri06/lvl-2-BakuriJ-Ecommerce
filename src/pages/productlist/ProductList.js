@@ -11,6 +11,7 @@ import productData from "../../api/data";
 import Loader from "../../components/Loader";
 import { useEffect } from "react";
 import Api from "../../api/Api";
+import './productList.css'
 
 const ProductList = () => {
   const [data, setData] = useState(productData);
@@ -39,7 +40,7 @@ const ProductList = () => {
 
   useEffect(() => {
     setLoading(true);
-    Api.getProductList("products")
+    Api.getProductList()
       .then((resp) => {
         setData(resp);
       })
@@ -56,19 +57,20 @@ const ProductList = () => {
       <Image />
       <Container maxWidth="lg">
         <Grid container md>
-          <Grid item xs={4} md={4} sm={4}>
-            <Sidebar />
+          <Grid item xs={12} sm={4} md={4} sm={4} className="empty">
+            <Sidebar/>
           </Grid>
-          <Grid item xs={8} md={8} sm={12} mt={5} component="Box">
+          <Grid item xs={12} md={8} sm={12} mt={5}>
             <Grid container>
               <Label
+                xs={12}
                 total={page.total}
                 limit={page.limit}
                 onChange={changePage}
               />
               <Loader isLoading={loading}>
                 {data.map((el) => (
-                  <Grid item xs={4} lg={4} md={6} sm={6} mb={5}>
+                  <Grid item xs={6} lg={4} md={6} sm={6} mb={5}>
                     <Card data={el} />
                   </Grid>
                 ))}

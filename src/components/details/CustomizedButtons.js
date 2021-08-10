@@ -98,6 +98,7 @@ export default function CustomizedButtons() {
   const [data, setData] = useState([]);
   let dispatch = useDispatch();
   const user = useSelector(selectUser);
+  let counter = 0;
 
   const { id } = useParams();
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function CustomizedButtons() {
   }, []);
 
   const addTo = () => {
-    let counter = 0;
+    
     counter++;
     console.log(counter);
     dispatch(addToCart(counter));

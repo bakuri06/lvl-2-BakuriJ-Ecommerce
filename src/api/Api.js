@@ -50,8 +50,9 @@ const Api = {
     });
   },
 
-  getProductList: (url) => {
-    return Api.getData(url).then((json) => {
+  getProductList: () => {
+    return Api.getData('products').then((json) => {
+      console.log(json)
       return serializeProductList(json.data);
     });
   },
@@ -82,7 +83,7 @@ const Api = {
   },
 
   getMe: (token) => {
-    return Api.getData("auth/me", undefined,'POST', token);
+    return Api.getData("auth/me", undefined, "POST", token);
   },
 };
 
