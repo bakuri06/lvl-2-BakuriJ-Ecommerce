@@ -11,16 +11,23 @@ import productData from "../../api/data";
 import Loader from "../../components/Loader";
 import { useEffect } from "react";
 import Api from "../../api/Api";
-import './productList.css'
+import "./productList.css";
+import { useDispatch } from "react-redux";
+import { setProducts } from "./../../store/products/productActionCreator";
+import { useSelector } from "react-redux";
+import { selectProduct } from "./../../store/products/productSelector";
 
 const ProductList = () => {
-  const [data, setData] = useState(productData);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState({
     page: 1,
     total: 100,
     limit: 20,
   });
+
+  let dispatch = useDispatch();
+
+  const dataProduct = useSelector(selectProduct);
 
   const changePage = (e, p) => {
     setLoading(true);
@@ -30,7 +37,7 @@ const ProductList = () => {
           ...page,
           page: p,
         });
-        setData(resp);
+        dispatch(setProducts(resp));
       })
       .catch((err) => console.log(err))
       .finally(() => {
@@ -42,7 +49,7 @@ const ProductList = () => {
     setLoading(true);
     Api.getProductList()
       .then((resp) => {
-        setData(resp);
+        dispatch(setProducts(resp));
       })
       .catch((err) => {
         console.log("Caught it: ", err);
@@ -51,6 +58,7 @@ const ProductList = () => {
         setLoading(false);
       });
   }, []);
+  console.log(productData);
 
   return (
     <MainContent>
@@ -58,7 +66,7 @@ const ProductList = () => {
       <Container maxWidth="lg">
         <Grid container md>
           <Grid item xs={12} sm={4} md={4} sm={4} className="empty">
-            <Sidebar/>
+            <Sidebar />
           </Grid>
           <Grid item xs={12} md={8} sm={12} mt={5}>
             <Grid container>
@@ -69,7 +77,7 @@ const ProductList = () => {
                 onChange={changePage}
               />
               <Loader isLoading={loading}>
-                {data.map((el) => (
+                {dataProduct.products.map((el) => (
                   <Grid item xs={6} lg={4} md={6} sm={6} mb={5}>
                     <Card data={el} />
                   </Grid>

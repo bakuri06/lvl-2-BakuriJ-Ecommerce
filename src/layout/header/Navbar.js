@@ -102,7 +102,7 @@ export default function Navbar({ isAdmin }) {
               <li>
                 <i className="fas fa-shopping-cart pl-0"></i>
                 <MLink component={Link} to={SHOPPINGCART}>
-                  <i className="badge-pill">{user.counter}</i>
+                  <i className="badge-pill">{user.product.length}</i>
                 </MLink>
               </li>
               <li>
