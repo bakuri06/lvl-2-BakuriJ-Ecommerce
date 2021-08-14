@@ -21,11 +21,13 @@ import {
   ADMIN,
   SIGNUP,
   SHOPPINGCART,
+  USERPROFILE
 } from "./routes";
 
 import { useDispatch } from "react-redux";
 import { selectUser } from "./store/user/userSelector";
 import { setLoginIn,setLogin,setUser } from "./store/user/userActionCreator";
+import UserProfile from './pages/user/UserProfile';
 
 
 const token = localStorage.getItem("token");
@@ -37,7 +39,7 @@ const App = () => {
   }, []);
 
   const user = useSelector(selectUser);
-
+  
   const isTokenAllowed = () => {
     if (token) {
       Api.getMe(token)
@@ -60,6 +62,7 @@ const App = () => {
       <Switch>
         <Route path={PRODUCT_LIST} component={ProductList} />
         <Route path={SINGLE_LIST} component={SingleProduct} />
+        <PrivateRoute path={USERPROFILE} component={UserProfile} />
         <PrivateRoute path={ADMIN} component={AdminPanel} />
         <Route path={SIGNUP} component={SignUp} />
         <Route path={SIGNIN} component={SignIn} />

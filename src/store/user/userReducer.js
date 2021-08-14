@@ -5,6 +5,7 @@ import {
   SET_LOGININ,
   ADD_CART,
   ADD_PRODUCT,
+  SET_IMAGE,
 } from "./userConsts";
 
 const initialState = {

@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_USER,SET_LOGININ,SET_LOGED,ADD_CART, ADD_PRODUCT} from './userConsts';
+import { SET_TOKEN, SET_USER,SET_LOGININ,SET_LOGED,ADD_CART, ADD_PRODUCT,SET_IMAGE} from './userConsts';
 
 export const setUser = (user) => {
     return {
@@ -13,6 +13,7 @@ export const setToken = (token) => {
         token
     }
 }
+
 
 export const setLogin = (boolean) => {
     return {

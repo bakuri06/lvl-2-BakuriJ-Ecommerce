@@ -6,3 +6,4 @@ export const PAGINATION='/pagination';
 export const SIGNIN='/login';
 export const SIGNUP='/register';
 export const SHOPPINGCART='/shopping_cart';
+export const USERPROFILE='/user_profile';

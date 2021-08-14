@@ -4,7 +4,7 @@ import { serializeSingleProduct } from "./../serializeProductList";
 const Api = {
   baseUrl: "http://159.65.126.180/api/",
 
-  getData: (url, params, method = "get", token) => {
+  getData: (url, params, method = "get", token, file) => {
     function objectToQueryString(obj) {
       return Object.keys(obj)
         .map((key) => key + "=" + obj[key])
@@ -18,6 +18,15 @@ const Api = {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      };
+    } else if (token && file) {
+      options = {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`,
         },
       };
@@ -51,8 +60,8 @@ const Api = {
   },
 
   getProductList: () => {
-    return Api.getData('products').then((json) => {
-      console.log(json)
+    return Api.getData("products").then((json) => {
+      console.log(json);
       return serializeProductList(json.data);
     });
   },
@@ -84,6 +93,10 @@ const Api = {
 
   getMe: (token) => {
     return Api.getData("auth/me", undefined, "POST", token);
+  },
+
+  update: (id, params, token) => {
+    return Api.getData(`users/${id}/update`, params, "POST", token);
   },
 };
 
