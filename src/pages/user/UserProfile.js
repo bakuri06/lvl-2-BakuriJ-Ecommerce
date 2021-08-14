@@ -31,10 +31,11 @@ const UserProfile = () => {
   const userData = useSelector(selectUser);
   const [data, setData] = useState(userData.user);
   console.log(userData);
+  let src;
 
   const showPreviewOne = (e) => {
     if (e.target.files.length > 0) {
-      const src = URL.createObjectURL(e.target.files[0]);
+      src = URL.createObjectURL(e.target.files[0]);
       setData({
         ...data,
         avatar: src,
@@ -53,6 +54,7 @@ const UserProfile = () => {
     initialValues: {
       name: "",
       nickname: "",
+      avatar:''
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
       Api.update(
@@ -60,16 +62,16 @@ const UserProfile = () => {
         {
           name: values.name,
           nickname: values.nickname,
+          avatar:values.avatar
         },
         token,
-        false
+        true
       )
         .then((data) => {
           console.log(data);
           setData(data);
           setStatus(true);
           resetForm();
-          dispatch(setUser(data));
           alert("You succesfully updated your profile");
         })
         .catch((error) => {
@@ -119,7 +121,7 @@ const UserProfile = () => {
                         color="textSecondary"
                         component="p"
                       >
-                        {userData.email}
+                        {userData.user.email}
                       </Typography>
                     </CardContent>
                   </CardActionArea>
@@ -165,6 +167,7 @@ const UserProfile = () => {
                           <input
                             type="file"
                             name="avatar"
+                            value={formik.values.avatar}
                             id="avatar"
                             accept="image/*"
                             onChange={(e) => showPreviewOne(e)}
