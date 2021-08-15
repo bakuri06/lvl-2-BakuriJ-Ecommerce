@@ -79,7 +79,6 @@ export default function Navbar({ isAdmin }) {
           <Typography variant="h6" className={classes.title}>
             <i className="fab fa-mdb fa-3x" alt="mdb logo"></i>
           </Typography>
-          <i className="fas fa-bars"></i>
 
           {isAdmin ? (
             ""
@@ -153,7 +152,7 @@ export default function Navbar({ isAdmin }) {
               )}
             </ul>
           )}
-          {/* <BurgerMenu/> */}
+          <BurgerMenu/>
         </Toolbar>
       </AppBar>
     </div>

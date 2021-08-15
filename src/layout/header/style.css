@@ -74,6 +74,10 @@ a{
     display: none;
 }
 
+.toHide{
+    display: none;
+}
+
 @media screen and (max-width: 900px){
     .flexed{
         display: none;
@@ -81,5 +85,8 @@ a{
 
     .fa-bars{
         display:block;
+    }
+    .toHide{
+        display: block;
     }
 }

@@ -4,12 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import './style.css'
 
 const useStyles = makeStyles({
   list: {
@@ -46,7 +41,7 @@ export default function BurgerMenu() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
+      <List style={{display:'flex',flexDirection:'column',marginTop:'80px',padding:'10px'}}>
         <a href="">Product List</a>
         <a href="">Admin</a>
         <a href="">Sign In</a>
@@ -56,9 +51,9 @@ export default function BurgerMenu() {
   );
 
   return (
-    <div>
-        <React.Fragment key={'menu'}>
-          <Button onClick={toggleDrawer('right', true)}>{'Menu'}</Button>
+    <div className='toHide'>
+        <React.Fragment  key={'menu'}> 
+          <Button className='toHide' onClick={toggleDrawer('right', true)}>{'Menu'}</Button>
           <SwipeableDrawer
             anchor={'right'}
             open={state['right']}
