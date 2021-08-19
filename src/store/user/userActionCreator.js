@@ -1,5 +1,5 @@
 import { SET_TOKEN, SET_USER,SET_LOGININ,SET_LOGED,ADD_CART, ADD_PRODUCT,SET_IMAGE} from './userConsts';
-
+import Api from '../../api/Api';
 export const setUser = (user) => {
     return {
         type:SET_USER,

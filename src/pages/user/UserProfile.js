@@ -18,10 +18,9 @@ import { Button } from "@material-ui/core";
 import "./uploadFile.css";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { setUser } from "../../store/user/userActionCreator";
 import { selectUser } from "./../../store/user/userSelector";
 import { useSelector } from "react-redux";
-import { setImage } from "./../../store/user/userActionCreator";
+import { setUser } from './../../store/user/userActionCreator';
 
 const UserProfile = () => {
   const classes = useStyles();
@@ -30,46 +29,20 @@ const UserProfile = () => {
   let dispatch = useDispatch();
   const userData = useSelector(selectUser);
   const [data, setData] = useState(userData.user);
-  console.log(userData);
-  let src;
-
-  const showPreviewOne = (e) => {
-    if (e.target.files.length > 0) {
-      src = URL.createObjectURL(e.target.files[0]);
-      setData({
-        ...data,
-        avatar: src,
-      });
-
-      dispatch(
-        setUser({
-          ...data,
-          avatar: src,
-        })
-      );
-    }
-  };
 
   const formik = useFormik({
     initialValues: {
       name: "",
       nickname: "",
-      avatar:''
+      avatar: "",
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
-      Api.update(
-        data.id,
-        {
-          name: values.name,
-          nickname: values.nickname,
-          avatar:values.avatar
-        },
-        token,
-        true
-      )
+      Api.update(userData.user.id,values,token)
         .then((data) => {
           console.log(data);
+          dispatch(setUser(data))
           setData(data);
+          console.log(data);
           setStatus(true);
           resetForm();
           alert("You succesfully updated your profile");
@@ -109,7 +82,6 @@ const UserProfile = () => {
                   <CardActionArea>
                     <CardMedia
                       style={{ height: "300px" }}
-                      image={data.avatar}
                       title="Contemplative Reptile"
                     />
                     <CardContent>
@@ -157,24 +129,17 @@ const UserProfile = () => {
                   </Box>
 
                   <Box style={{ width: "50%" }}>
-                    <div className="image-upload-one">
-                      <p>Upload photo</p>
-                      <div className="center">
-                        <div className="form-input">
-                          <label for="avatar">
-                            <img id="file-ip-1-preview" src={data.avatar} />
-                          </label>
-                          <input
-                            type="file"
-                            name="avatar"
-                            value={formik.values.avatar}
-                            id="avatar"
-                            accept="image/*"
-                            onChange={(e) => showPreviewOne(e)}
-                          />
-                        </div>
-                      </div>
-                    </div>
+                    <TextField
+                      id="avatar"
+                      name="avatar"
+                      type="file"
+                      variant="outlined"
+                      onChange={(e) => {
+                        console.log(e.target.files[0]);
+                        formik.setFieldValue("avatar", e.target.files[0]);
+                        console.log(formik.avatar)
+                      }}
+                    />
                   </Box>
 
                   <Button type="submit">Update</Button>

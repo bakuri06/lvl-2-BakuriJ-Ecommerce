@@ -12,21 +12,11 @@ const Api = {
     }
 
     let options;
-    if (token) {
+    if (token && file) {
       options = {
         method,
         headers: {
-          "Content-Type": "application/json",
           Accept: "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      };
-    } else if (token && file) {
-      options = {
-        method,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/x-www-form-urlencoded",
           Authorization: `Bearer ${token}`,
         },
       };
@@ -36,6 +26,7 @@ const Api = {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
       };
     }
@@ -44,6 +35,7 @@ const Api = {
       if (method === "GET") {
         url += "?" + objectToQueryString(params);
       } else {
+        console.log('aq var');
         options.body = JSON.stringify(params);
       }
     }
@@ -61,7 +53,6 @@ const Api = {
 
   getProductList: () => {
     return Api.getData("products").then((json) => {
-      console.log(json);
       return serializeProductList(json.data);
     });
   },
@@ -73,10 +64,10 @@ const Api = {
   },
 
   signInApi: (params) => {
-    return Api.getData("auth/login", params, "POST", undefined);
+    return Api.getData("auth/login", params, "POST", undefined, false);
   },
   signUpApi: (params) => {
-    return Api.getData("register", params, "POST", undefined);
+    return Api.getData("register", params, "POST", undefined, false);
   },
 
   getFilteredList: (limit) => {
@@ -92,11 +83,12 @@ const Api = {
   },
 
   getMe: (token) => {
-    return Api.getData("auth/me", undefined, "POST", token);
+    return Api.getData("auth/me", undefined, "POST", token, false);
   },
 
-  update: (id, params, token) => {
-    return Api.getData(`users/${id}/update`, params, "POST", token);
+  update: (id, params,token,) => {
+    console.log(token)
+    return Api.getData(`users/${id}/update`, params, 'POST', token, false);
   },
 };
 
