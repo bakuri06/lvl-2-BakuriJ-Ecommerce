@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { setProducts } from "./../../store/products/productActionCreator";
 import { useSelector } from "react-redux";
 import { selectProduct } from "./../../store/products/productSelector";
+import Cookies from "js-cookie";
+import { getCookie } from "../../helpers";
 
 const ProductList = () => {
   const [loading, setLoading] = useState(false);
@@ -26,8 +28,9 @@ const ProductList = () => {
   });
 
   let dispatch = useDispatch();
-
   const dataProduct = useSelector(selectProduct);
+
+  // console.log(getCookie("products"));
 
   const changePage = (e, p) => {
     setLoading(true);

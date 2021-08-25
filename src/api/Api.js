@@ -21,6 +21,7 @@ const Api = {
         },
       };
     } else {
+      console.log('aq var')
       options = {
         method,
         headers: {

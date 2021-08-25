@@ -32,8 +32,8 @@ const UserProfile = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      nickname: "",
+      name: userData.user.name,
+      nickname:  userData.user.nickname,
       avatar: "",
     },
     onSubmit: (values, { setStatus, resetForm, setErrors, setSubmitting }) => {
@@ -42,7 +42,6 @@ const UserProfile = () => {
           console.log(data);
           dispatch(setUser(data))
           setData(data);
-          console.log(data);
           setStatus(true);
           resetForm();
           alert("You succesfully updated your profile");

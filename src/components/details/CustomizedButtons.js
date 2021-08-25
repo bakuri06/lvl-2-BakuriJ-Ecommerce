@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "./../../store/user/userSelector";
 import { addToCart } from "../../store/user/userActionCreator";
 import { addProduct } from "./../../store/user/userActionCreator";
+import Cookies from "js-cookie";
+import { setCookie } from "../../helpers";
+import ProductList from "../../pages/productlist/ProductList";
 
 const BootstrapButton = withStyles({
   root: {
@@ -108,6 +111,7 @@ export default function CustomizedButtons() {
 
   const addTo = () => {
     dispatch(addProduct(data));
+    setCookie("products", user.product, 3);
   };
 
   return (
