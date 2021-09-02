@@ -12,6 +12,9 @@ import { addProduct } from "./../../store/user/userActionCreator";
 import Cookies from "js-cookie";
 import { setCookie } from "../../helpers";
 import ProductList from "../../pages/productlist/ProductList";
+import { setCart,removeQuantity,setTotal } from "./../../store/cart/cartActionCreator";
+import { selectProducts, selectQuantity } from "../../store/cart/cartSelector";
+import { selectProduct } from "./../../store/products/productSelector";
 
 const BootstrapButton = withStyles({
   root: {
@@ -101,6 +104,9 @@ export default function CustomizedButtons() {
   const [data, setData] = useState([]);
   let dispatch = useDispatch();
   const user = useSelector(selectUser);
+  let counter = useSelector(selectQuantity);
+  let cartt = useSelector(selectProducts);
+  console.log(cartt);
 
   const { id } = useParams();
   useEffect(() => {
@@ -110,7 +116,11 @@ export default function CustomizedButtons() {
   }, []);
 
   const addTo = () => {
-    dispatch(addProduct(data));
+    for (let i = 0; i < counter; i++) {
+      dispatch(addProduct(data));
+    }
+    dispatch(setCart(data, counter));
+    dispatch(removeQuantity());
     setCookie("products", user.product, 3);
   };
 

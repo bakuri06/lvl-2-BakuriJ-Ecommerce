@@ -1,35 +1,44 @@
-import { Box } from "@material-ui/core"
-import { useState } from "react"
-import "./Counter.css"
-import { Button } from "@material-ui/core"
+import { Box } from "@material-ui/core";
+import { useState } from "react";
+import "./Counter.css";
+import { Button } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { increment, decrement } from "../../store/cart/cartActionCreator";
+import { useSelector } from "react-redux";
+import { selectQuantity } from "../../store/cart/cartSelector";
 
 const Counter = () => {
+  let dispatch = useDispatch();
+  let counter = useSelector(selectQuantity);
 
-    let [data, setData] = useState(0);
-    const minusCounter = () => {
-        let smth = data;
-        setData(--smth);
-        if (data < 0) {
-            return 0;
-        }
+  const minusCounter = () => {
+    if (counter > 0) {
+      dispatch(decrement());
     }
-    const plusCounter = () => {
-        let smth = data;
-        setData(++smth);
-    }
+  };
+  const plusCounter = () => {
+    dispatch(increment());
+  };
 
-    return (
-        <Box mt={'20px'}>
-            <Box color='#554F4F' fontSize='15px'>Quantity</Box>
-            <Box>
-                <form noValidate autoComplete="off" >
-                    <Button variant='outlined' onClick={minusCounter} >-</Button>
-                    <Button variant="outlined">{data}</Button>
-                    <Button variant='outlined' onClick={plusCounter} >+</Button>
-                </form>
-            </Box>
-        </Box>
-    )
-}
+
+  return (
+    <Box mt={"20px"}>
+      <Box color="#554F4F" fontSize="15px">
+        Quantity
+      </Box>
+      <Box>
+        <form noValidate autoComplete="off">
+          <Button variant="outlined" onClick={minusCounter}>
+            -
+          </Button>
+          <Button variant="outlined">{counter}</Button>
+          <Button variant="outlined" onClick={plusCounter}>
+            +
+          </Button>
+        </form>
+      </Box>
+    </Box>
+  );
+};
 
 export default Counter;
