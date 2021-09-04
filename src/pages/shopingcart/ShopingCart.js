@@ -19,8 +19,8 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { CardActions } from "@material-ui/core";
 import { Typography } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
-import { useSelector } from 'react-redux';
-import { selectUser } from './../../store/user/userSelector';
+import { useSelector } from "react-redux";
+import { selectUser } from "./../../store/user/userSelector";
 
 const useSecondStyles = makeStyles({
   root: {
@@ -48,9 +48,17 @@ const ShoppingCart = () => {
   const classes = useStyles();
   const secondClasses = useSecondStyles();
   const [loading, setLoading] = useState(false);
-  const user = useSelector(selectUser)
+  const user = useSelector(selectUser);
   let totalPrice = 0;
   console.log(user.product);
+
+  const removeItem = (el) => {
+    console.log(el);
+    let arr = user.product;
+    //  arr = arr.filter((item) => item == el);
+
+    console.log(arr);
+  };
 
   return (
     <MainContent>
@@ -109,9 +117,7 @@ const ShoppingCart = () => {
                                     <p>Size: M</p>
                                   </Box>
                                   <Box>
-                                    <Box>
-                                      <Counter />
-                                    </Box>
+                                    {/* <Box><secondCounter/></Box> */}
                                   </Box>
                                 </Box>
                                 <Box
@@ -121,7 +127,7 @@ const ShoppingCart = () => {
                                   alignItems="center"
                                 >
                                   <Box>
-                                    <Button>
+                                    <Button onClick={() => removeItem(el)}>
                                       <DeleteIcon></DeleteIcon>Remove Item
                                     </Button>
 
